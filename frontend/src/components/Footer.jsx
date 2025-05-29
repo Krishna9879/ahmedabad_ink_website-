@@ -20,7 +20,7 @@ const Footer = () => {
               transition={{ duration: 0.5 }}
               className="text-xl font-serif font-bold text-white mb-6"
             >
-              About Ink Masters
+              About Ahmedabad Ink Tattoo
             </motion.h3>
             <motion.p 
               initial={{ opacity: 0, y: 20 }}
@@ -29,7 +29,7 @@ const Footer = () => {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="text-gray-400 mb-6"
             >
-              Premium tattoo studio specializing in custom designs and various tattoo styles. Our award-winning artists are committed to creating beautiful, lasting art.
+              Ahmedabad's premier tattoo studio specializing in custom designs, traditional Indian art, and modern tattoo styles. Our skilled artists create unique body art with precision and care.
             </motion.p>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -39,16 +39,20 @@ const Footer = () => {
               className="flex space-x-4"
             >
               <motion.a
-                href="#"
+                href="https://www.facebook.com/ahmedabadinktattoo"
                 whileHover={{ y: -5, color: '#C41E3A' }}
                 className="text-gray-400 hover:text-primary transition-colors"
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 <FaFacebook size={20} />
               </motion.a>
               <motion.a
-                href="#"
+                href="https://www.instagram.com/ahmedabadinktattoo"
                 whileHover={{ y: -5, color: '#C41E3A' }}
                 className="text-gray-400 hover:text-primary transition-colors"
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 <FaInstagram size={20} />
               </motion.a>
@@ -56,6 +60,8 @@ const Footer = () => {
                 href="#"
                 whileHover={{ y: -5, color: '#C41E3A' }}
                 className="text-gray-400 hover:text-primary transition-colors"
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 <FaTwitter size={20} />
               </motion.a>
@@ -63,6 +69,8 @@ const Footer = () => {
                 href="#"
                 whileHover={{ y: -5, color: '#C41E3A' }}
                 className="text-gray-400 hover:text-primary transition-colors"
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 <FaYoutube size={20} />
               </motion.a>
@@ -110,10 +118,10 @@ const Footer = () => {
               transition={{ duration: 0.5 }}
               className="text-xl font-serif font-bold text-white mb-6"
             >
-              Services
+              Our Services
             </motion.h3>
             <ul className="space-y-3">
-              {['Custom Tattoos', 'Traditional', 'Black & Grey', 'Cover-ups', 'Watercolor', 'Touch-ups'].map((service, i) => (
+              {['Custom Tattoos', 'Traditional Indian', 'Black & Grey', 'Cover-ups', 'Portrait Tattoos', 'Tattoo Touch-ups'].map((service, i) => (
                 <motion.li
                   key={service}
                   initial={{ opacity: 0, x: -20 }}
@@ -133,7 +141,7 @@ const Footer = () => {
             </ul>
           </div>
           
-          {/* Newsletter */}
+          {/* Contact Info */}
           <div>
             <motion.h3 
               initial={{ opacity: 0, y: 20 }}
@@ -142,36 +150,43 @@ const Footer = () => {
               transition={{ duration: 0.5 }}
               className="text-xl font-serif font-bold text-white mb-6"
             >
-              Newsletter
+              Contact Us
             </motion.h3>
-            <motion.p 
+            <motion.div 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-gray-400 mb-4"
+              className="space-y-4 text-gray-400"
             >
-              Subscribe to our newsletter for the latest designs, promotions, and studio news.
-            </motion.p>
+              <p>Ahmedabad, Gujarat, India</p>
+              <p>Open: 11AM - 8PM (Mon-Sat)</p>
+              <p>Phone: +91 12345 67890</p>
+              <p>Email: info@ahmedabadinktattoo.com</p>
+            </motion.div>
+            
             <motion.form
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="flex"
+              className="mt-6"
             >
-              <input
-                type="email"
-                placeholder="Your email"
-                className="py-2 px-4 bg-dark/50 border border-gray-700 text-white rounded-l-lg focus:outline-none focus:ring-2 focus:ring-primary w-full"
-              />
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-primary text-white py-2 px-4 rounded-r-lg hover:bg-accent transition-colors duration-300"
-              >
-                Join
-              </motion.button>
+              <p className="text-gray-400 mb-2">Book an appointment:</p>
+              <div className="flex">
+                <input
+                  type="text"
+                  placeholder="Your phone"
+                  className="py-2 px-4 bg-dark/50 border border-gray-700 text-white rounded-l-lg focus:outline-none focus:ring-2 focus:ring-primary w-full"
+                />
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="bg-primary text-white py-2 px-4 rounded-r-lg hover:bg-accent transition-colors duration-300"
+                >
+                  Call Me
+                </motion.button>
+              </div>
             </motion.form>
           </div>
         </div>
@@ -188,7 +203,7 @@ const Footer = () => {
             transition={{ duration: 0.5 }}
             className="text-gray-500 text-sm"
           >
-            &copy; {currentYear} Ink Masters Studio. All rights reserved.
+            &copy; {currentYear} Ahmedabad Ink Tattoo. All rights reserved.
           </motion.p>
           
           <motion.div
@@ -205,7 +220,7 @@ const Footer = () => {
               Terms of Service
             </a>
             <a href="#" className="text-gray-500 hover:text-primary text-sm transition-colors">
-              Cookie Policy
+              Health & Safety
             </a>
           </motion.div>
         </div>

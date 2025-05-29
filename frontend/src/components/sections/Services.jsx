@@ -9,44 +9,44 @@ const Services = () => {
     {
       id: 1,
       title: 'Custom Tattoos',
-      description: 'Unique, personalized designs created specifically for you. Our artists work with you to bring your vision to life.',
+      description: 'Our artists work closely with you to create a unique design that tells your story. From concept to completion, we ensure your tattoo is one-of-a-kind.',
       icon: '🎨',
-      details: ['One-on-one consultation', 'Multiple design revisions', 'Premium inks and equipment']
+      details: ['Personalized consultations', 'Multiple design iterations', 'Premium inks and equipment']
     },
     {
       id: 2,
-      title: 'Traditional',
-      description: 'Bold lines and vibrant colors in classic American, Japanese and tribal styles for timeless tattoo designs.',
+      title: 'Traditional Tattoos',
+      description: 'Experience the timeless art of traditional tattooing with bold lines and vibrant colors. Perfect for those who appreciate classic styles.',
       icon: '🌊',
-      details: ['Old school designs', 'Vibrant lasting colors', 'Bold outlines']
+      details: ['Classic American and Japanese styles', 'Bold outlines', 'Vibrant, lasting colors']
     },
     {
       id: 3,
-      title: 'Black & Grey',
-      description: 'Subtle depth and incredible detail using various shades of black and grey for stunning realistic imagery.',
+      title: 'Black & Grey Tattoos',
+      description: 'Achieve stunning depth and realism with our black and grey tattoo services. Ideal for portraits and detailed imagery.',
       icon: '⚫',
-      details: ['Fine line work', 'Photorealistic shading', 'Custom grayscale']
+      details: ['Fine line work', 'Photorealistic shading', 'Custom grayscale designs']
     },
     {
       id: 4,
       title: 'Cover-ups',
-      description: 'Transform unwanted tattoos into beautiful new designs. Our specialists can help you reimagine your skin.',
+      description: 'Transform unwanted tattoos into beautiful new art. Our specialists are skilled in creating cover-ups that you’ll love.',
       icon: '✨',
-      details: ['Free evaluation', 'Creative solutions', 'Color correction']
+      details: ['Free evaluation', 'Creative design solutions', 'Color correction']
     },
     {
       id: 5,
-      title: 'Watercolor',
-      description: 'Vivid and dreamy designs that mimic the flowing nature of watercolor paintings on your skin.',
-      icon: '🌈',
-      details: ['Vibrant color blending', 'Abstract designs', 'Soft edges and transitions']
+      title: 'Piercing Services',
+      description: 'Professional and hygienic piercing services for a variety of styles. From ear and nose piercings to unique body modifications, we’ve got you covered.',
+      icon: '💎',
+      details: ['Sterile and safe procedures', 'Wide range of piercing options', 'Expert aftercare advice']
     },
     {
       id: 6,
-      title: 'Touch-ups',
-      description: 'Revitalize and enhance your existing tattoos to restore their original beauty or improve upon them.',
-      icon: '✅',
-      details: ['Color refresh', 'Line restoration', 'Detail enhancement']
+      title: 'Tattoo Removal',
+      description: 'Safely and effectively remove or lighten unwanted tattoos with our advanced tattoo removal services. Trust our experts for the best results.',
+      icon: '🧼',
+      details: ['State-of-the-art technology', 'Safe and effective removal', 'Expert care and guidance']
     },
   ]
 
@@ -86,7 +86,7 @@ const Services = () => {
             Our <span className="text-primary">Services</span>
           </h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            From custom designs to touch-ups, our studio offers a wide range of professional services
+            Explore our wide range of tattoo and piercing services, designed to bring your vision to life.
           </p>
         </motion.div>
 

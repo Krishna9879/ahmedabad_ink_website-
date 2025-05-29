@@ -10,36 +10,49 @@ const Testimonials = () => {
   const testimonials = [
     {
       id: 1,
-      name: 'Sarah J.',
-      image: 'https://images.pexels.com/photos/1858175/pexels-photo-1858175.jpeg',
+      name: 'Dudan!',
+      image: 'https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?w=500&auto=format&fit=crop&q=60',
       rating: 5,
-      quote: 'The artists here are incredibly talented. They took my vague idea and turned it into something beyond my expectations. The studio is clean, and the staff is friendly and professional.',
-      tattooist: 'Alex Rivera',
+      quote: 'Excellent service and amazing tattoo work!',
+      date: '2024-12-16',
+      source: 'Google'
     },
     {
       id: 2,
-      name: 'Michael T.',
-      image: 'https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg',
+      name: 'Tarun Hippara',
+      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&auto=format&fit=crop&q=60',
       rating: 5,
-      quote: 'From the consultation to the final result, everything was perfect. The attention to detail and the care they put into their work is amazing. I\'ll definitely be coming back for my next piece.',
-      tattooist: 'Sophia Chen',
+      quote: 'Very good service & good work',
+      date: '2024-11-11',
+      source: 'Google'
     },
     {
       id: 3,
-      name: 'Emma R.',
-      image: 'https://images.pexels.com/photos/3772509/pexels-photo-3772509.jpeg',
+      name: 'Neetu Sharma',
+      image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=500&auto=format&fit=crop&q=60',
       rating: 5,
-      quote: 'I was nervous about getting my first tattoo, but they made me feel comfortable throughout the whole process. The design is beautiful and the healing process was exactly as they described.',
-      tattooist: 'Marcus Johnson',
+      quote: 'It was great experience, highly recommended for tattoo lovers. I have done 3 tattoos.',
+      date: '2024-11-08',
+      source: 'Google'
     },
     {
       id: 4,
-      name: 'James L.',
-      image: 'https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg',
+      name: 'Siddharth Danidharia',
+      image: 'https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?w=500&auto=format&fit=crop&q=60',
       rating: 5,
-      quote: 'I\'ve been to many tattoo studios, but this one stands out. The creativity and skill level here is unmatched. They turn your ideas into masterpieces. Worth every penny and more!',
-      tattooist: 'Olivia Singh',
+      quote: 'Hey nice work. Really nice ink.',
+      date: '2024-11-08',
+      source: 'Google'
     },
+    {
+      id: 5,
+      name: 'Dhaval Danidhariya',
+      image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=500&auto=format&fit=crop&q=60',
+      rating: 5,
+      quote: 'Professional service and excellent tattoo quality.',
+      date: '2024-11-08',
+      source: 'Google'
+    }
   ]
 
   const nextTestimonial = () => {
@@ -88,7 +101,7 @@ const Testimonials = () => {
             Client <span className="text-primary">Testimonials</span>
           </h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Hear what our clients have to say about their experience with us
+            EXCELLENT - Based on 200 reviews
           </p>
         </motion.div>
 
@@ -113,10 +126,18 @@ const Testimonials = () => {
                     className="w-full h-full object-cover"
                   />
                 </div>
+                <p className="text-center text-gray-400">
+                  {testimonials[currentIndex].date}
+                </p>
               </div>
               
               <div className="w-full md:w-2/3">
-                <FaQuoteLeft className="text-primary/30 text-5xl mb-4" />
+                <div className="flex justify-between items-start mb-2">
+                  <FaQuoteLeft className="text-primary/30 text-5xl" />
+                  <span className="text-primary text-sm bg-primary/10 px-2 py-1 rounded">
+                    {testimonials[currentIndex].source}
+                  </span>
+                </div>
                 
                 <p className="text-lg text-gray-200 italic mb-6">
                   "{testimonials[currentIndex].quote}"
@@ -131,10 +152,6 @@ const Testimonials = () => {
                 <h3 className="text-xl font-serif font-bold">
                   {testimonials[currentIndex].name}
                 </h3>
-                
-                <p className="text-gray-400">
-                  Tattooed by {testimonials[currentIndex].tattooist}
-                </p>
               </div>
             </div>
           </motion.div>

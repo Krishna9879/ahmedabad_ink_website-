@@ -25,7 +25,7 @@ const Contact = () => {
     setTimeout(() => {
       setFormStatus({ 
         submitted: true, 
-        message: 'Thank you for your message! We will contact you shortly to discuss your tattoo ideas.' 
+        message: 'Thank you for your message! We will contact you shortly to discuss your tattoo or piercing ideas at Ahmedabad Ink Tattoo.' 
       })
       setFormData({
         name: '',
@@ -91,7 +91,7 @@ const Contact = () => {
             Get In <span className="text-primary">Touch</span>
           </h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Ready to get inked? Contact us to book a consultation or learn more about our services
+            Ready to get inked or pierced? Contact us to book a consultation or learn more about our services at Ahmedabad Ink Tattoo.
           </p>
         </motion.div>
 
@@ -116,7 +116,11 @@ const Contact = () => {
                   </div>
                   <div>
                     <h4 className="text-lg font-medium">Location</h4>
-                    <p className="text-gray-400">123 Tattoo Street, Art District<br />New York, NY 10001</p>
+                    <p className="text-gray-400">
+                      FF/109, Silver Square Complex, opp. Dipak School<br />
+                      near Gangotri Circle, Sanidhya Park, Nikol<br />
+                      Ahmedabad, Gujarat 382350
+                    </p>
                   </div>
                 </div>
                 
@@ -126,7 +130,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <h4 className="text-lg font-medium">Phone</h4>
-                    <p className="text-gray-400">+1 (555) 123-4567</p>
+                    <p className="text-gray-400">+91 88668 48681</p>
                   </div>
                 </div>
                 
@@ -136,7 +140,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <h4 className="text-lg font-medium">Email</h4>
-                    <p className="text-gray-400">info@inkmastersstudio.com</p>
+                    <p className="text-gray-400">info@ahmedabadinktattoo.com</p>
                   </div>
                 </div>
                 
@@ -147,8 +151,7 @@ const Contact = () => {
                   <div>
                     <h4 className="text-lg font-medium">Hours</h4>
                     <p className="text-gray-400">
-                      Monday - Friday: 11am - 8pm<br />
-                      Saturday: 10am - 6pm<br />
+                      Monday - Saturday: 10am - 8pm<br />
                       Sunday: Closed
                     </p>
                   </div>
@@ -158,14 +161,14 @@ const Contact = () => {
             
             <div className="rounded-lg overflow-hidden shadow-lg">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.9663095343004!2d-74.00543882426866!3d40.74144713476223!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259bf5c1654f3%3A0xc80f9cfce5383d5d!2sMadison%20Square%20Garden!5e0!3m2!1sen!2sus!4v1690309255129!5m2!1sen!2sus"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3671.705181684695!2d72.66457657421195!3d23.03466011641873!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e873e40d32bc5%3A0xafee5a813b8e0e0e!2sAhmedabad%20Ink%20Tattoo!5e0!3m2!1sen!2sin!4v1730369805129!5m2!1sen!2sin"
                 width="100%"
                 height="250"
                 style={{ border: 0 }}
                 allowFullScreen=""
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                title="Ink Masters Studio Location"
+                title="Ahmedabad Ink Tattoo Location"
               ></iframe>
             </div>
           </motion.div>
@@ -252,12 +255,12 @@ const Contact = () => {
                         className="input-field"
                       >
                         <option value="">Select a service</option>
-                        <option value="Custom Tattoo">Custom Tattoo</option>
-                        <option value="Traditional">Traditional</option>
-                        <option value="Black & Grey">Black & Grey</option>
-                        <option value="Cover-up">Cover-up</option>
-                        <option value="Watercolor">Watercolor</option>
-                        <option value="Touch-up">Touch-up</option>
+                        <option value="Custom Tattoos">Custom Tattoos</option>
+                        <option value="Traditional Tattoos">Traditional Tattoos</option>
+                        <option value="Black & Grey Tattoos">Black & Grey Tattoos</option>
+                        <option value="Cover-ups">Cover-ups</option>
+                        <option value="Piercing Services">Piercing Services</option>
+                        <option value="Tattoo Removal">Tattoo Removal</option>
                         <option value="Consultation">Consultation Only</option>
                       </motion.select>
                     </div>
@@ -274,7 +277,7 @@ const Contact = () => {
                       rows="5"
                       required
                       className="input-field"
-                      placeholder="Tell us about your tattoo idea"
+                      placeholder="Tell us about your tattoo or piercing idea"
                     ></motion.textarea>
                   </div>
                   
