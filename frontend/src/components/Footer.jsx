@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { FaFacebook, FaInstagram, FaTwitter, FaYoutube, FaArrowRight } from 'react-icons/fa'
+import { FaFacebook, FaInstagram, FaArrowRight } from 'react-icons/fa'
 
 const Footer = () => {
   const currentYear = new Date().getFullYear()
@@ -29,7 +29,7 @@ const Footer = () => {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="text-gray-400 mb-6"
             >
-              Ahmedabad's premier tattoo studio specializing in custom designs, traditional Indian art, and modern tattoo styles. Our skilled artists create unique body art with precision and care.
+              Established over a decade ago, Ahmedabad Ink Tattoo is a leading tattoo studio in Ahmedabad, specializing in custom designs, piercings, and tattoo removal. Our passionate artists ensure a hygienic and creative experience for every client.
             </motion.p>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -48,31 +48,13 @@ const Footer = () => {
                 <FaFacebook size={20} />
               </motion.a>
               <motion.a
-                href="https://www.instagram.com/ahmedabadinktattoo"
+                href="https://www.instagram.com/ahmedabadinktattoo/"
                 whileHover={{ y: -5, color: '#C41E3A' }}
                 className="text-gray-400 hover:text-primary transition-colors"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 <FaInstagram size={20} />
-              </motion.a>
-              <motion.a
-                href="#"
-                whileHover={{ y: -5, color: '#C41E3A' }}
-                className="text-gray-400 hover:text-primary transition-colors"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <FaTwitter size={20} />
-              </motion.a>
-              <motion.a
-                href="#"
-                whileHover={{ y: -5, color: '#C41E3A' }}
-                className="text-gray-400 hover:text-primary transition-colors"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <FaYoutube size={20} />
               </motion.a>
             </motion.div>
           </div>
@@ -89,7 +71,7 @@ const Footer = () => {
               Quick Links
             </motion.h3>
             <ul className="space-y-3">
-              {['Home', 'Gallery', 'Artists', 'Services', 'Testimonials', 'Contact'].map((link, i) => (
+              {['Home', 'Gallery', 'Our Team', 'Services', 'Testimonials', 'Contact'].map((link, i) => (
                 <motion.li
                   key={link}
                   initial={{ opacity: 0, x: -20 }}
@@ -98,7 +80,7 @@ const Footer = () => {
                   transition={{ duration: 0.5, delay: 0.1 * i }}
                 >
                   <a
-                    href={`#${link.toLowerCase()}`}
+                    href={`#${link.toLowerCase().replace(' ', '-')}`}
                     className="text-gray-400 hover:text-primary transition-colors flex items-center"
                   >
                     <FaArrowRight className="mr-2 text-sm" />
@@ -121,7 +103,7 @@ const Footer = () => {
               Our Services
             </motion.h3>
             <ul className="space-y-3">
-              {['Custom Tattoos', 'Traditional Indian', 'Black & Grey', 'Cover-ups', 'Portrait Tattoos', 'Tattoo Touch-ups'].map((service, i) => (
+              {['Custom Tattoos', 'Traditional Tattoos', 'Black & Grey Tattoos', 'Cover-ups', 'Piercing Services', 'Tattoo Removal'].map((service, i) => (
                 <motion.li
                   key={service}
                   initial={{ opacity: 0, x: -20 }}
@@ -159,9 +141,13 @@ const Footer = () => {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="space-y-4 text-gray-400"
             >
-              <p>Ahmedabad, Gujarat, India</p>
-              <p>Open: 11AM - 8PM (Mon-Sat)</p>
-              <p>Phone: +91 12345 67890</p>
+              <p>
+                FF/109, Silver Square Complex, opp. Dipak School<br />
+                near Gangotri Circle, Sanidhya Park, Nikol<br />
+                Ahmedabad, Gujarat 382350
+              </p>
+              <p>Open: 10AM - 8PM (Mon-Sat)</p>
+              <p>Phone: +91 88668 48681</p>
               <p>Email: info@ahmedabadinktattoo.com</p>
             </motion.div>
             
@@ -176,7 +162,7 @@ const Footer = () => {
               <div className="flex">
                 <input
                   type="text"
-                  placeholder="Your phone"
+                  placeholder="Your phone number"
                   className="py-2 px-4 bg-dark/50 border border-gray-700 text-white rounded-l-lg focus:outline-none focus:ring-2 focus:ring-primary w-full"
                 />
                 <motion.button
@@ -203,7 +189,7 @@ const Footer = () => {
             transition={{ duration: 0.5 }}
             className="text-gray-500 text-sm"
           >
-            &copy; {currentYear} Ahmedabad Ink Tattoo. All rights reserved.
+            © {currentYear} Ahmedabad Ink Tattoo. All rights reserved.
           </motion.p>
           
           <motion.div
