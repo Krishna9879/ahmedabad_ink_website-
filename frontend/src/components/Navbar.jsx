@@ -36,7 +36,7 @@ const Navbar = () => {
       ],
     },
     { name: 'CONTACT', href: '/contactpage' },
-    { name: 'FAQs', href: '#contact' },
+    { name: 'FAQs', href: '/faqs' },
   ];
 
   const navbarVariants = {

@@ -12,6 +12,7 @@ import Services from './pages/ServicePage'
 import Contact from './pages/Contactpage'
 import TattooRemoval from './pages/TattooRemoval'
 import Portfolio from './pages/Portfolio'
+import FAQ from './pages/faq'
 
 function App() {
   useEffect(() => {
@@ -34,6 +35,7 @@ function App() {
           
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/faqs" element={<FAQ />} />
             <Route path="/portfolio" element={<Portfolio />} />
             <Route path="/about" element={<AboutUs />} />
             <Route path="/offers" element={<Offers />} />
