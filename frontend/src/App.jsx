@@ -8,6 +8,9 @@ import AboutUs from './pages/About'
 import CursorEffect from './components/CursorEffect'
 import { ScrollToTop } from './components/ScrollToTop'
 import Offers from './pages/Offers'
+import Services from './pages/ServicePage'
+import Contact from './pages/Contactpage'
+import TattooRemoval from './pages/TattooRemoval'
 
 function App() {
   useEffect(() => {
@@ -32,6 +35,9 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<AboutUs />} />
             <Route path="/offers" element={<Offers />} />
+            <Route path="/servicespage" element={<Services />} />
+            <Route path="/contactpage" element={<Contact />} />
+              <Route path="/tattooRemoval" element={<TattooRemoval />} />
           </Routes>
           
           <Footer />

@@ -1,42 +1,43 @@
-import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { FaBars, FaTimes, FaAngleDown } from 'react-icons/fa'
-import { Link } from 'react-router-dom'
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { FaBars, FaTimes, FaAngleDown } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false)
-  const [isScrolled, setIsScrolled] = useState(false)
-  const [isServicesOpen, setIsServicesOpen] = useState(false) // For mobile Services dropdown
+  const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isServicesOpen, setIsServicesOpen] = useState(false);
+  const [timeoutId, setTimeoutId] = useState(null);
 
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 50) {
-        setIsScrolled(true)
+        setIsScrolled(true);
       } else {
-        setIsScrolled(false)
+        setIsScrolled(false);
       }
-    }
+    };
 
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const navLinks = [
     { name: 'HOME', href: '/' },
     { name: 'ABOUT US', href: '/about' },
     { name: 'OFFERS', href: '/offers' },
+    { name: 'PORTFOLIO', href: '#testimonials' },
     {
       name: 'Services',
-      href: '#services',
+      href: '/servicespage',
       subLinks: [
-        { name: 'Tattoo Services', href: '#services#tattoo-services' },
-        { name: 'Piercing Services', href: '#services#piercing-services' },
+        { name: 'CUSTOM TATTOO', href: '/servicespage' },
+        { name: 'TATTOO REMOVAL', href: '/tattooRemoval' },
       ],
     },
-    { name: 'PORTFOLIO', href: '#testimonials' },
-    { name: 'CONTACT', href: '#testimonials' },
+    { name: 'CONTACT', href: '/contactpage' },
     { name: 'FAQs', href: '#contact' },
-  ]
+  ];
 
   const navbarVariants = {
     hidden: { y: -100, opacity: 0 },
@@ -48,7 +49,7 @@ const Navbar = () => {
         ease: 'easeInOut',
       },
     },
-  }
+  };
 
   const mobileMenuVariants = {
     closed: {
@@ -67,7 +68,7 @@ const Navbar = () => {
         ease: 'easeInOut',
       },
     },
-  }
+  };
 
   const linkVariants = {
     hidden: { opacity: 0, y: 20 },
@@ -79,7 +80,7 @@ const Navbar = () => {
         duration: 0.5,
       },
     }),
-  }
+  };
 
   const dropdownVariants = {
     hidden: { opacity: 0, y: -10, display: 'none' },
@@ -92,7 +93,22 @@ const Navbar = () => {
         ease: 'easeInOut',
       },
     },
-  }
+  };
+
+  const handleMouseEnter = () => {
+    if (timeoutId) {
+      clearTimeout(timeoutId);
+      setTimeoutId(null);
+    }
+    setIsServicesOpen(true);
+  };
+
+  const handleMouseLeave = () => {
+    const id = setTimeout(() => {
+      setIsServicesOpen(false);
+    }, 300);
+    setTimeoutId(id);
+  };
 
   return (
     <>
@@ -106,33 +122,38 @@ const Navbar = () => {
       >
         <div className="px-6">
           <div className="flex justify-between items-center">
-            <motion.a 
+            <motion.a
               as={Link}
               to="/"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="text-lg md:text-xl font-serif font-bold text-white"
-              style={{ fontFamily: "'Dosis', sans-serif" }}
+              className="text-lg md:text-xl font-bold text-white"
+              style={{ fontFamily: "'Dosis', sans-serif'" }}
             >
               <span className="text-primary">AHMEDABAD</span> INK TATTOO
             </motion.a>
 
             {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center space-x-4">
+            <nav className="hidden md:flex items-center space-x-4 flex-nowrap">
               {navLinks.map((link, i) => (
-                <div key={link.name} className="relative group">
+                <div
+                  key={link.name}
+                  className="relative group"
+                  onMouseEnter={link.subLinks ? handleMouseEnter : undefined}
+                  onMouseLeave={link.subLinks ? handleMouseLeave : undefined}
+                >
                   <motion.div
                     custom={i}
                     variants={linkVariants}
                     initial="hidden"
                     animate="visible"
                     className="relative px-4 py-2 text-white group text-sm flex items-center"
-                    onMouseEnter={() => link.subLinks && setIsServicesOpen(true)}
-                    onMouseLeave={() => link.subLinks && setIsServicesOpen(false)}
                   >
                     <Link
                       to={link.href}
-                      className="flex items-center"
+                      className={`flex items-center ${
+                        link.name === 'ABOUT US' ? 'whitespace-nowrap' : ''
+                      }`}
                     >
                       {link.name}
                       {link.subLinks && (
@@ -148,10 +169,9 @@ const Navbar = () => {
                       variants={dropdownVariants}
                       initial="hidden"
                       animate={isServicesOpen ? 'visible' : 'hidden'}
-                      className="absolute top-full left-0 mt-2 bg-black/90 backdrop-blur-lg rounded-lg shadow-lg z-50 min-w-[200px]"
-                      onMouseEnter={() => setIsServicesOpen(true)}
-                      onMouseLeave={() => setIsServicesOpen(false)}
+                      className="absolute top-full left-0 bg-black/90 backdrop-blur-lg rounded-lg shadow-lg z-50 min-w-[200px] pt-1"
                     >
+                      <div className="absolute -top-2 left-0 w-full h-2 bg-transparent"></div>
                       {link.subLinks.map((subLink, subIndex) => (
                         <motion.div
                           key={subLink.name}
@@ -161,23 +181,21 @@ const Navbar = () => {
                           animate="visible"
                           className="block px-4 py-2 text-white hover:text-primary hover:bg-primary/10 transition-colors duration-200 text-sm"
                         >
-                          <Link to={subLink.href}>
-                            {subLink.name}
-                          </Link>
+                          <Link to={subLink.href}>{subLink.name}</Link>
                         </motion.div>
                       ))}
                     </motion.div>
                   )}
                 </div>
               ))}
-              
+
               <motion.div
                 as={Link}
                 to="/contact"
                 whileHover={{ scale: 1.05, backgroundColor: '#8A0303' }}
                 whileTap={{ scale: 0.95 }}
-                className="ml-4 px-6 py-2 bg-primary text-white rounded-full text-sm font-medium transition-all duration-300 shadow-lg hover:shadow-primary/20"
-                style={{ fontFamily: "'Open Sans', sans-serif" }}
+                className="ml-4 px-6 py-2 bg-primary text-white rounded-full text-sm font-medium transition-all duration-300 shadow-lg hover:shadow-primary/20 whitespace-nowrap"
+                style={{ fontFamily: "'Open Sans', sans-serif'" }}
               >
                 Book Now
               </motion.div>
@@ -217,8 +235,8 @@ const Navbar = () => {
                   >
                     <Link
                       to={link.href}
-                      className="text-xl text-white hover:text-primary transition-colors duration-300"
-                      onClick={() => !link.subLinks && setIsOpen(false)} // Close menu if no sublinks
+                      className="text-xl text-white hover:text-primary transition-colors duration-300 whitespace-nowrap"
+                      onClick={() => !link.subLinks && setIsOpen(false)}
                     >
                       {link.name}
                     </Link>
@@ -228,7 +246,9 @@ const Navbar = () => {
                         className="ml-2 text-white hover:text-primary"
                       >
                         <FaAngleDown
-                          className={`transition-transform duration-200 ${isServicesOpen ? 'rotate-180' : ''}`}
+                          className={`transition-transform duration-200 ${
+                            isServicesOpen ? 'rotate-180' : ''
+                          }`}
                         />
                       </button>
                     )}
@@ -251,10 +271,7 @@ const Navbar = () => {
                           animate="visible"
                           className="block text-lg text-gray-300 hover:text-primary transition-colors duration-200"
                         >
-                          <Link
-                            to={subLink.href}
-                            onClick={() => setIsOpen(false)}
-                          >
+                          <Link to={subLink.href} onClick={() => setIsOpen(false)}>
                             {subLink.name}
                           </Link>
                         </motion.div>
@@ -263,7 +280,7 @@ const Navbar = () => {
                   )}
                 </div>
               ))}
-              
+
               <motion.div
                 as={Link}
                 to="/contact"
@@ -281,7 +298,7 @@ const Navbar = () => {
         )}
       </AnimatePresence>
     </>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;
