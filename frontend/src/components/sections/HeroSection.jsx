@@ -1,32 +1,30 @@
-import { useEffect, useRef } from 'react'
-import { motion } from 'framer-motion'
-import { gsap } from 'gsap'
-import { FaAngleDown } from 'react-icons/fa'
+import { useEffect, useRef } from 'react';
+import { motion } from 'framer-motion';
+import { gsap } from 'gsap';
 
 const HeroSection = () => {
-  const needleRef = useRef(null)
-  const textRef = useRef(null)
-  const containerRef = useRef(null)
+  const needleRef = useRef(null);
+  const textRef = useRef(null);
+  const containerRef = useRef(null);
 
   useEffect(() => {
     // Animate the tattoo needle with subtle floating and rotation
-    const needle = needleRef.current
-    
+    const needle = needleRef.current;
+
     if (needle) {
-      const tl = gsap.timeline({ repeat: -1, yoyo: true })
-      
+      const tl = gsap.timeline({ repeat: -1, yoyo: true });
+
       tl.to(needle, {
         y: '-20px',
         rotation: 5,
         duration: 3,
-        ease: 'power1.inOut'
-      })
-      .to(needle, {
+        ease: 'power1.inOut',
+      }).to(needle, {
         y: '0px',
         rotation: -2,
         duration: 2.5,
-        ease: 'power1.inOut'
-      })
+        ease: 'power1.inOut',
+      });
     }
 
     // Text animation
@@ -35,33 +33,53 @@ const HeroSection = () => {
       y: 50,
       duration: 1.5,
       ease: 'power3.out',
-      delay: 0.5
-    })
+      delay: 0.5,
+    });
 
     // Parallax effect (reduced intensity)
     gsap.to(containerRef.current, {
       yPercent: 10, // Reduced from 30 to 10 to minimize overlap
-      ease: "none",
+      ease: 'none',
       scrollTrigger: {
         trigger: containerRef.current,
-        start: "top top",
-        end: "bottom top",
-        scrub: true
-      }
-    })
-  }, [])
+        start: 'top top',
+        end: 'bottom top',
+        scrub: true,
+      },
+    });
+  }, []);
 
   return (
-    <section id="home" className="relative min-h-screen flex flex-col items-center justify-center bg-black mb-20">
-      {/* Background with overlay */}
+    <section
+      id="home"
+      className="relative min-h-screen flex flex-col items-center justify-center bg-black overflow-hidden"
+    >
+      {/* Background with comprehensive overlay */}
       <div className="absolute inset-0 z-0">
+        {/* Background image */}
         <div className="absolute inset-0 bg-hero-pattern bg-cover bg-center bg-no-repeat bg-fixed transform scale-110"></div>
-        <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/70 to-black"></div>
+
+        {/* Primary gradient overlay - covers entire section */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/95 via-black/80 to-black/90"></div>
+
+        {/* Secondary overlay for additional coverage */}
+        <div className="absolute inset-0 bg-black/20"></div>
+
+        {/* Radial gradient for center focus */}
+        <div className="absolute inset-0 bg-gradient-radial from-transparent via-black/30 to-black/60"></div>
+
+        {/* Texture overlay */}
         <div className="absolute inset-0 bg-texture bg-repeat opacity-5"></div>
+
+        {/* Bottom edge reinforcement */}
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent"></div>
       </div>
 
       {/* Content */}
-      <div ref={containerRef} className="container-custom relative z-30 text-center pt-20 mt-20 pb-20">
+      <div
+        ref={containerRef}
+        className="container-custom relative z-30 text-center pt-20 mt-20 pb-32"
+      >
         <div className="flex justify-center items-center mb-8">
           <motion.div
             ref={needleRef}
@@ -71,7 +89,7 @@ const HeroSection = () => {
             className="w-full max-w-[300px] relative"
           >
             <img
-              src="https://images.pexels.com/photos/6593351/pexels-photo-6593351.jpeg" 
+              src="https://images.pexels.com/photos/6593351/pexels-photo-6593351.jpeg"
               alt="Tattoo Machine"
               className="object-cover rounded-full shadow-2xl transform hover:scale-105 transition-transform duration-500"
             />
@@ -83,16 +101,16 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.5 }}
-            className="text-5xl md:text-7xl lg:text-8xl font-serif font-bold text-white leading-tight drop-shadow-[0_4px_8px_rgba(0,0,0,0.6)]"
+            className="text-5xl md:text-7xl lg:text-8xl font-serif font-bold text-white leading-tight drop-shadow-[0_6px_12px_rgba(0,0,0,0.8)]"
           >
             <span className="text-primary">AHMEDABAD</span> INK TATTOO
           </motion.h1>
-          
+
           <motion.p
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
-            className="text-xl md:text-2xl text-white mt-6 max-w-3xl mx-auto font-medium drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)]"
+            className="text-xl md:text-2xl text-white mt-6 max-w-3xl mx-auto font-medium drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]"
           >
             Dream | Create | Inspire – Art with Meaning at Ahmedabad Ink Tattoo.
           </motion.p>
@@ -111,7 +129,7 @@ const HeroSection = () => {
             >
               View Our Work
             </motion.a>
-            
+
             <motion.a
               href="#contact"
               whileHover={{ scale: 1.05, backgroundColor: 'rgba(255,255,255,0.1)' }}
@@ -124,24 +142,10 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* Scroll down indicator */}
-      <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ 
-          duration: 1, 
-          delay: 1.5,
-          repeat: Infinity,
-          repeatType: 'reverse',
-          repeatDelay: 0.5
-        }}
-        className="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-white flex flex-col items-center z-30"
-      >
-        <span className="text-sm mb-2">Scroll Down</span>
-        <FaAngleDown className="animate-bounce" />
-      </motion.div>
+      {/* Additional bottom section coverage */}
+      <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-black via-black/80 to-transparent z-20"></div>
     </section>
-  )
-}
+  );
+};
 
-export default HeroSection
+export default HeroSection;

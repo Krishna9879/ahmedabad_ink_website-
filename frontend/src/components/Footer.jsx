@@ -148,7 +148,7 @@ const Footer = () => {
               </p>
               <p>Open: 10AM - 8PM (Mon-Sat)</p>
               <p>Phone: +91 88668 48681</p>
-              <p>Email: info@ahmedabadinktattoo.com</p>
+              <p>Email: ahmedabadinkt@gmail.com</p>
             </motion.div>
             
             <motion.form

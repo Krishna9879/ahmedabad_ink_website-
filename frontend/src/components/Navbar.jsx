@@ -3,25 +3,25 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { FaBars, FaTimes, FaAngleDown } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
+// Create a motion-enhanced Link component
+const MotionLink = motion(Link);
+
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
   const [timeoutId, setTimeoutId] = useState(null);
 
+  // Handle scroll effect for navbar background
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      setIsScrolled(window.scrollY > 50);
     };
-
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Navigation links data
   const navLinks = [
     { name: 'HOME', href: '/' },
     { name: 'ABOUT US', href: '/about' },
@@ -39,35 +39,15 @@ const Navbar = () => {
     { name: 'FAQs', href: '/faqs' },
   ];
 
+  // Animation variants
   const navbarVariants = {
     hidden: { y: -100, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.8,
-        ease: 'easeInOut',
-      },
-    },
+    visible: { y: 0, opacity: 1, transition: { duration: 0.8, ease: 'easeInOut' } },
   };
 
   const mobileMenuVariants = {
-    closed: {
-      opacity: 0,
-      x: '100%',
-      transition: {
-        duration: 0.5,
-        ease: 'easeInOut',
-      },
-    },
-    open: {
-      opacity: 1,
-      x: 0,
-      transition: {
-        duration: 0.5,
-        ease: 'easeInOut',
-      },
-    },
+    closed: { opacity: 0, x: '100%', transition: { duration: 0.5, ease: 'easeInOut' } },
+    open: { opacity: 1, x: 0, transition: { duration: 0.5, ease: 'easeInOut' } },
   };
 
   const linkVariants = {
@@ -75,10 +55,7 @@ const Navbar = () => {
     visible: (i) => ({
       opacity: 1,
       y: 0,
-      transition: {
-        delay: i * 0.1,
-        duration: 0.5,
-      },
+      transition: { delay: i * 0.1, duration: 0.5 },
     }),
   };
 
@@ -88,13 +65,11 @@ const Navbar = () => {
       opacity: 1,
       y: 0,
       display: 'block',
-      transition: {
-        duration: 0.3,
-        ease: 'easeInOut',
-      },
+      transition: { duration: 0.3, ease: 'easeInOut' },
     },
   };
 
+  // Dropdown hover handlers
   const handleMouseEnter = () => {
     if (timeoutId) {
       clearTimeout(timeoutId);
@@ -104,9 +79,7 @@ const Navbar = () => {
   };
 
   const handleMouseLeave = () => {
-    const id = setTimeout(() => {
-      setIsServicesOpen(false);
-    }, 300);
+    const id = setTimeout(() => setIsServicesOpen(false), 300);
     setTimeoutId(id);
   };
 
@@ -122,8 +95,8 @@ const Navbar = () => {
       >
         <div className="px-6">
           <div className="flex justify-between items-center">
-            <motion.a
-              as={Link}
+            {/* Logo */}
+            <MotionLink
               to="/"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -131,7 +104,7 @@ const Navbar = () => {
               style={{ fontFamily: "'Dosis', sans-serif'" }}
             >
               <span className="text-primary">AHMEDABAD</span> INK TATTOO
-            </motion.a>
+            </MotionLink>
 
             {/* Desktop Navigation */}
             <nav className="hidden md:flex items-center space-x-4 flex-nowrap">
@@ -160,10 +133,10 @@ const Navbar = () => {
                         <FaAngleDown className="ml-1 text-xs group-hover:rotate-180 transition-transform duration-200" />
                       )}
                     </Link>
-                    <span className="absolute bottom-0 left-0 w-full h-0.5 bg-primary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-200 origin-left"></span>
+                    <span className="absolute bottom-0 left-0 w-full h-0.5 bg-primary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-200 origin-left" />
                   </motion.div>
 
-                  {/* Dropdown for Services */}
+                  {/* Services Dropdown */}
                   {link.subLinks && (
                     <motion.div
                       variants={dropdownVariants}
@@ -171,7 +144,7 @@ const Navbar = () => {
                       animate={isServicesOpen ? 'visible' : 'hidden'}
                       className="absolute top-full left-0 bg-black/90 backdrop-blur-lg rounded-lg shadow-lg z-50 min-w-[200px] pt-1"
                     >
-                      <div className="absolute -top-2 left-0 w-full h-2 bg-transparent"></div>
+                      <div className="absolute -top-2 left-0 w-full h-2 bg-transparent" />
                       {link.subLinks.map((subLink, subIndex) => (
                         <motion.div
                           key={subLink.name}
@@ -189,16 +162,16 @@ const Navbar = () => {
                 </div>
               ))}
 
-              <motion.div
-                as={Link}
-                to="/contact"
+              {/* Desktop Book Now Button */}
+              <MotionLink
+                to="/contactpage"
                 whileHover={{ scale: 1.05, backgroundColor: '#8A0303' }}
                 whileTap={{ scale: 0.95 }}
                 className="ml-4 px-6 py-2 bg-primary text-white rounded-full text-sm font-medium transition-all duration-300 shadow-lg hover:shadow-primary/20 whitespace-nowrap"
                 style={{ fontFamily: "'Open Sans', sans-serif'" }}
               >
                 Book Now
-              </motion.div>
+              </MotionLink>
             </nav>
 
             {/* Mobile Menu Button */}
@@ -254,7 +227,7 @@ const Navbar = () => {
                     )}
                   </motion.div>
 
-                  {/* Mobile Submenu for Services */}
+                  {/* Mobile Services Submenu */}
                   {link.subLinks && isServicesOpen && (
                     <motion.div
                       initial={{ height: 0, opacity: 0 }}
@@ -281,9 +254,9 @@ const Navbar = () => {
                 </div>
               ))}
 
-              <motion.div
-                as={Link}
-                to="/contact"
+              {/* Mobile Book Now Button */}
+              <MotionLink
+                to="/contactpage"
                 custom={navLinks.length}
                 variants={linkVariants}
                 initial="hidden"
@@ -292,7 +265,7 @@ const Navbar = () => {
                 className="px-6 py-2 bg-primary text-white rounded-full font-medium hover:bg-accent transition-all duration-300"
               >
                 Book Now
-              </motion.div>
+              </MotionLink>
             </nav>
           </motion.div>
         )}

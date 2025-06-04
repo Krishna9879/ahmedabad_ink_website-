@@ -11,6 +11,13 @@ import Artists from './sections/Artists'
 import Testimonials from './sections/Testimonials'
 import Contact from './sections/Contact'
 import Stats from './sections/Stats'
+// Import images from assets folder
+import img1 from '../assets/insta_image1.jpg'
+import img2 from '../assets/insta_image2.jpg'
+import img3 from '../assets/insta_image3.jpg'
+import img4 from '../assets/insta_image4.jpg'
+import img5 from '../assets/insta_image5.jpg'
+import img6 from '../assets/insta_image6.jpg'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -80,36 +87,36 @@ const InstagramFeed = () => {
     }
   }
 
-  // Mock Instagram posts
+  // Mock Instagram posts with imported images
   const instagramPosts = [
     {
       id: 1,
-      img: 'https://images.pexels.com/photos/955938/pexels-photo-955938.jpeg',
+      img: img1,
       likes: 124,
     },
     {
       id: 2,
-      img: 'https://images.pexels.com/photos/3228213/pexels-photo-3228213.jpeg',
+      img: img2,
       likes: 245,
     },
     {
       id: 3,
-      img: 'https://images.pexels.com/photos/1043474/pexels-photo-1043474.jpeg',
+      img: img3,
       likes: 189,
     },
     {
       id: 4,
-      img: 'https://images.pexels.com/photos/2078271/pexels-photo-2078271.jpeg',
+      img: img4,
       likes: 302,
     },
     {
       id: 5,
-      img: 'https://images.pexels.com/photos/3059651/pexels-photo-3059651.jpeg',
+      img: img5,
       likes: 276,
     },
     {
       id: 6,
-      img: 'https://images.pexels.com/photos/3618362/pexels-photo-3618362.jpeg',
+      img: img6,
       likes: 167,
     },
   ]
@@ -128,14 +135,14 @@ const InstagramFeed = () => {
             Stay updated with our latest designs and behind-the-scenes moments by following us on Instagram
           </p>
           <motion.a 
-            href="https://instagram.com" 
+            href="https://www.instagram.com/ahmedabadinktattoo/" 
             target="_blank" 
             rel="noopener noreferrer"
             className="inline-flex items-center mt-4 text-primary hover:text-white transition-colors duration-300"
             whileHover={{ scale: 1.05 }}
           >
             <FaInstagram className="mr-2" size={20} />
-            <span>@inkmastersstudio</span>
+            <span>@ahmedabadinktattoo</span>
           </motion.a>
         </motion.div>
 
@@ -168,7 +175,7 @@ const InstagramFeed = () => {
 
         <div className="text-center mt-10">
           <motion.a
-            href="https://instagram.com"
+            href="https://www.instagram.com/ahmedabadinktattoo/"
             target="_blank"
             rel="noopener noreferrer"
             className="btn-primary inline-flex items-center"
