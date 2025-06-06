@@ -1,6 +1,233 @@
+
 import { useRef } from 'react';
 import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 import { FaArrowRight } from 'react-icons/fa';
+
+// FuturisticImage component with unique hover effects for different sections
+const FuturisticImage = ({ src, alt, className = "", section }) => {
+  // Define unique hover effects based on section
+  const hoverEffects = {
+    intro: {
+      overlay: (
+        <motion.div
+          className="absolute inset-0 bg-gradient-to-br from-primary/30 via-cyan-500/20 to-purple-500/30 opacity-0 group-hover:opacity-100"
+          animate={{
+            opacity: [0, 0.8, 0],
+            scale: [1, 1.1, 1],
+            transition: { duration: 1.5, repeat: Infinity, ease: 'easeInOut' }
+          }}
+        />
+      ),
+      particles: (
+        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+          {[...Array(10)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-2 h-2 bg-cyan-400 rounded-full"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+              }}
+              animate={{
+                scale: [0, 1.5, 0],
+                opacity: [0, 1, 0],
+                transition: {
+                  duration: 2,
+                  repeat: Infinity,
+                  delay: Math.random() * 1.5,
+                  ease: 'easeInOut'
+                }
+              }}
+            />
+          ))}
+        </div>
+      ),
+    },
+    creativity: {
+      overlay: (
+        <motion.div
+          className="absolute inset-0 bg-gradient-radial from-primary/40 via-transparent to-transparent opacity-0 group-hover:opacity-100"
+          animate={{
+            scale: [1, 1.2, 1],
+            opacity: [0, 0.7, 0],
+            transition: { duration: 2, repeat: Infinity, ease: 'easeInOut' }
+          }}
+        />
+      ),
+      particles: (
+        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+          {[...Array(8)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-3 h-3 border-2 border-primary rounded-sm"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+              }}
+              animate={{
+                scale: [0, 1.3, 0],
+                opacity: [0, 0.8, 0],
+                transition: {
+                  duration: 1.8,
+                  repeat: Infinity,
+                  delay: Math.random() * 1.2,
+                  ease: 'easeInOut'
+                }
+              }}
+            />
+          ))}
+        </div>
+      ),
+    },
+    tech: {
+      overlay: (
+        <motion.div
+          className="absolute inset-0 bg-gradient-to-t from-primary/50 to-transparent opacity-0 group-hover:opacity-100"
+          animate={{
+            opacity: [0, 0.9, 0],
+            transition: { duration: 1.8, repeat: Infinity, ease: 'easeInOut' }
+          }}
+        />
+      ),
+      particles: (
+        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+          {[...Array(12)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-1.5 h-1.5 bg-purple-400 rounded-full"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+              }}
+              animate={{
+                scale: [0, 1.4, 0],
+                opacity: [0, 1, 0],
+                transition: {
+                  duration: 2.2,
+                  repeat: Infinity,
+                  delay: Math.random() * 1.8,
+                  ease: 'easeInOut'
+                }
+              }}
+            />
+          ))}
+        </div>
+      ),
+    },
+    hologram: {
+      overlay: (
+        <motion.div
+          className="absolute inset-0 bg-gradient-to-r from-cyan-500/30 to-primary/30 opacity-0 group-hover:opacity-100"
+          animate={{
+            opacity: [0, 0.85, 0],
+            scale: [1, 1.15, 1],
+            transition: { duration: 2.5, repeat: Infinity, ease: 'easeInOut' }
+          }}
+        />
+      ),
+      particles: (
+        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+          {[...Array(15)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-2 h-2 bg-white/50 rounded-full"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+              }}
+              animate={{
+                scale: [0, 1.6, 0],
+                opacity: [0, 0.9, 0],
+                transition: {
+                  duration: 2,
+                  repeat: Infinity,
+                  delay: Math.random() * 1.5,
+                  ease: 'easeInOut'
+                }
+              }}
+            />
+          ))}
+        </div>
+      ),
+    },
+    gallery: {
+      overlay: (
+        <motion.div
+          className="absolute inset-0 bg-gradient-to-br from-primary/25 via-purple-500/20 to-cyan-500/25 opacity-0 group-hover:opacity-100"
+          animate={{
+            opacity: [0, 0.75, 0],
+            scale: [1, 1.1, 1],
+            transition: { duration: 2.3, repeat: Infinity, ease: 'easeInOut' }
+          }}
+        />
+      ),
+      particles: (
+        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+          {[...Array(10)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-2.5 h-2.5 border border-cyan-400 rounded-full"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+              }}
+              animate={{
+                scale: [0, 1.5, 0],
+                opacity: [0, 0.85, 0],
+                transition: {
+                  duration: 2.5,
+                  repeat: Infinity,
+                  delay: Math.random() * 1.7,
+                  ease: 'easeInOut'
+                }
+              }}
+            />
+          ))}
+        </div>
+      ),
+    },
+  };
+
+  const currentEffect = hoverEffects[section] || hoverEffects.gallery;
+
+  return (
+    <motion.div
+      variants={{
+        hidden: { opacity: 0, scale: 0.9 },
+        visible: {
+          opacity: 1,
+          scale: 1,
+          transition: { duration: 0.8, ease: 'easeOut' }
+        },
+        hover: {
+          scale: 1.05,
+          transition: { duration: 0.4, ease: 'easeOut' }
+        }
+      }}
+      initial="hidden"
+      animate="visible"
+      whileHover="hover"
+      className={`relative group overflow-hidden ${className}`}
+    >
+      <img
+        src={src}
+        alt={alt}
+        className="w-full h-full object-cover transition-all duration-700 group-hover:brightness-110"
+      />
+      {currentEffect.overlay}
+      {currentEffect.particles}
+      <div className="absolute inset-0 border-2 border-transparent group-hover:border-primary/60 transition-all duration-500">
+        <div className="absolute inset-0 border-2 border-transparent group-hover:border-cyan-400/40 transition-all duration-700 delay-100" />
+      </div>
+      <div className="absolute top-2 left-2 w-4 h-4 border-l-2 border-t-2 border-primary/0 group-hover:border-primary transition-all duration-500" />
+      <div className="absolute top-2 right-2 w-4 h-4 border-r-2 border-t-2 border-primary/0 group-hover:border-primary transition-all duration-500" />
+      <div className="absolute bottom-2 left-2 w-4 h-4 border-l-2 border-b-2 border-primary/0 group-hover:border-primary transition-all duration-500" />
+      <div className="absolute bottom-2 right-2 w-4 h-4 border-r-2 border-b-2 border-primary/0 group-hover:border-primary transition-all duration-500" />
+      <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 mix-blend-overlay" />
+      <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 via-cyan-500/20 to-primary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm -z-10" />
+    </motion.div>
+  );
+};
 
 const AboutUs = () => {
   const ref = useRef(null);
@@ -35,7 +262,6 @@ const AboutUs = () => {
     cta: useInView(sectionRefs.cta, inViewOptions)
   };
 
-  // Animation Variants
   const glowVariants = {
     hidden: { opacity: 0, scale: 0.8 },
     visible: {
@@ -61,22 +287,6 @@ const AboutUs = () => {
     }
   };
 
-  const imageVariants = {
-    hidden: { opacity: 0, rotate: -5, scale: 0.9 },
-    visible: {
-      opacity: 1,
-      rotate: 0,
-      scale: 1,
-      transition: { duration: 0.8, ease: 'easeOut' }
-    },
-    hover: {
-      scale: 1.05,
-      rotate: 2,
-      boxShadow: '0 0 30px rgba(196, 30, 58, 0.7)',
-      transition: { duration: 0.3 }
-    }
-  };
-
   const staggerChildren = {
     hidden: { opacity: 0 },
     visible: {
@@ -92,9 +302,7 @@ const AboutUs = () => {
 
   return (
     <div ref={ref} className="bg-black text-white relative overflow-hidden">
-      {/* Enhanced Futuristic Background Effects */}
       <div className="absolute inset-0 pointer-events-none">
-        {/* Glowing Particles */}
         {[...Array(100)].map((_, i) => (
           <motion.div
             key={i}
@@ -116,7 +324,6 @@ const AboutUs = () => {
             }}
           />
         ))}
-        {/* Laser Lines */}
         {[...Array(5)].map((_, i) => (
           <motion.div
             key={`line-${i}`}
@@ -139,7 +346,6 @@ const AboutUs = () => {
         ))}
       </div>
 
-      {/* Hero Section */}
       <section ref={sectionRefs.hero} className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <motion.div
           style={{ y: yBg, opacity: opacityBg }}
@@ -159,15 +365,14 @@ const AboutUs = () => {
           className="relative z-10 text-center px-4 max-w-6xl mx-auto"
         >
           <motion.h1
-            className="text-5xl md:text-9xl font-serif font-bold mb-8 tracking-widest"
-            style={{ fontFamily: "'Dosis', sans-serif", textShadow: '0 0 30px rgba(196, 30, 58, 0.7)' }}
+            className="text-5xl md:text-9xl font-dosis font-bold mb-8 tracking-widest"
+            style={{ textShadow: '0 0 30px rgba(196, 30, 58, 0.7)' }}
             animate={{ color: ['#ffffff', '#C41E3A', '#ffffff'], transition: { duration: 3, repeat: Infinity } }}
           >
             Welcome To <span className="text-primary">AHMEDABAD INK TATTOO</span>
           </motion.h1>
           <motion.p
-            className="text-xl md:text-3xl text-gray-300 mb-10"
-            style={{ fontFamily: "'Open Sans', sans-serif'" }}
+            className="text-xl md:text-3xl text-gray-300 mb-10 font-openSans"
           >
             Pioneering the Future of Tattoo Artistry Since 2015
           </motion.p>
@@ -175,8 +380,7 @@ const AboutUs = () => {
             href="#contact"
             whileHover={{ scale: 1.2, boxShadow: '0 0 40px rgba(196, 30, 58, 0.9)' }}
             whileTap={{ scale: 0.95 }}
-            className="inline-flex items-center bg-primary text-white py-4 px-10 rounded-xl font-medium border-2 border-primary/70 hover:bg-transparent hover:text-primary transition-all duration-500"
-            style={{ fontFamily: "'Open Sans', sans-serif'" }}
+            className="inline-flex items-center bg-primary text-white py-4 px-10 rounded-xl font-medium border-2 border-primary/70 hover:bg-transparent hover:text-primary transition-all duration-500 font-openSans"
           >
             Step Into the Future
             <FaArrowRight className="ml-3" />
@@ -184,10 +388,9 @@ const AboutUs = () => {
         </motion.div>
       </section>
 
-      {/* Introduction Section */}
       <section ref={sectionRefs.intro} className="py-12 relative">
         <div className="absolute inset-0 bg-gradient-to-b from-black to-gray-900 opacity-90"></div>
-        <div className="container-custom relative z-10">
+        <div className="container mx-auto px-4 relative z-10">
           <motion.div
             initial="hidden"
             animate={isInView.intro ? 'visible' : 'hidden'}
@@ -196,38 +399,24 @@ const AboutUs = () => {
           >
             <motion.div variants={textVariants}>
               <h2
-                className="text-4xl md:text-6xl font-serif font-bold mb-6 text-left"
-                style={{ fontFamily: "'Dosis', sans-serif'", textShadow: '0 0 15px rgba(196, 30, 58, 0.5)' }}
+                className="text-4xl md:text-6xl font-dosis font-bold mb-6 text-left"
+                style={{ textShadow: '0 0 15px rgba(196, 30, 58, 0.5)' }}
               >
                 Our <span className="text-primary">Legacy</span>
               </h2>
-              <p
-                className="text-lg text-gray-300 mb-4"
-                style={{ fontFamily: "'Open Sans', sans-serif'" }}
-              >
+              <p className="text-lg text-gray-300 mb-4 font-openSans">
                 Ahmedabad Ink Tattoo has been a cornerstone of artistic expression in Ahmedabad for over a decade. Our studio is more than just a place to get inked—it’s a creative haven where your ideas come to life through the hands of our skilled artists. Specializing in custom tattoos, piercings, and tattoo removal, we pride ourselves on delivering exceptional quality and a personalized experience.
               </p>
-              <p
-                className="text-lg text-gray-300 mb-4"
-                style={{ fontFamily: "'Open Sans', sans-serif'" }}
-              >
+              <p className="text-lg text-gray-300 mb-4 font-openSans">
                 We’re redefining tattoo artistry with cutting-edge technology, ensuring every piece is a masterpiece that stands the test of time.
               </p>
             </motion.div>
-            <motion.div
-              variants={imageVariants}
-              initial="hidden"
-              animate="visible"
-              whileHover="hover"
-              className="relative rounded-xl overflow-hidden border-2 border-primary/40"
-            >
-              <img
-                src="https://ahmedabadinktattoo.com/wp-content/uploads/2024/12/AiK-2-768x1367.jpg"
-                alt="Studio interior"
-                className="w-full h-96 object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-primary/30 to-transparent pointer-events-none" />
-            </motion.div>
+            <FuturisticImage
+              src="https://ahmedabadinktattoo.com/wp-content/uploads/2024/12/AiK-2-768x1367.jpg"
+              alt="Studio interior"
+              className="rounded-xl border-2 border-primary/40 h-96"
+              section="intro"
+            />
           </motion.div>
           <motion.div
             variants={staggerChildren}
@@ -237,30 +426,21 @@ const AboutUs = () => {
               'https://ahmedabadinktattoo.com/wp-content/uploads/2024/12/IMG_8298-2048x1952.jpg',
               'https://ahmedabadinktattoo.com/wp-content/uploads/2024/12/ramgarhia-tattoos-studio-chhabewal-hoshiarpur-tattoo-artists-j66c8ikzwr-1536x1152.avif',
             ].map((src, index) => (
-              <motion.div
+              <FuturisticImage
                 key={index}
-                variants={imageVariants}
-                initial="hidden"
-                animate="visible"
-                whileHover="hover"
-                className="relative rounded-xl overflow-hidden border-2 border-primary/40"
-              >
-                <img
-                  src={src}
-                  alt={`Intro Image ${index + 1}`}
-                  className="w-full h-64 object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-primary/30 to-transparent pointer-events-none" />
-              </motion.div>
+                src={src}
+                alt={`Intro Image ${index + 1}`}
+                className="rounded-xl border-2 border-primary/40 h-64"
+                section="intro"
+              />
             ))}
           </motion.div>
         </div>
       </section>
 
-      {/* Creativity Section */}
       <section ref={sectionRefs.creativity} className="py-12 relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://ahmedabadinktattoo.com/wp-content/uploads/2025/02/ABF52542-1062-4FDC-AD8D-5D0FCA015E0B.jpg')] bg-cover bg-center opacity-10" />
-        <div className="container-custom relative z-10">
+        <div className="container mx-auto px-4 relative z-10">
           <motion.div
             initial="hidden"
             animate={isInView.creativity ? 'visible' : 'hidden'}
@@ -269,15 +449,14 @@ const AboutUs = () => {
           >
             <motion.h2
               variants={textVariants}
-              className="text-4xl md:text-6xl font-serif font-bold mb-6"
-              style={{ fontFamily: "'Dosis', sans-serif'", textShadow: '0 0 20px rgba(196, 30, 58, 0.6)' }}
+              className="text-4xl md:text-6xl font-dosis font-bold mb-6"
+              style={{ textShadow: '0 0 20px rgba(196, 30, 58, 0.6)' }}
             >
               Art That <span className="text-primary">Transcends Time</span>
             </motion.h2>
             <motion.p
               variants={textVariants}
-              className="text-xl text-gray-300 max-w-4xl mx-auto"
-              style={{ fontFamily: "'Open Sans', sans-serif'" }}
+              className="text-xl text-gray-300 max-w-4xl mx-auto font-openSans"
             >
               At Ahmedabad Ink Tattoo, we believe in the power of art to tell stories, evoke emotions, and celebrate individuality. Our team of passionate artists works closely with each client to craft unique designs that reflect their personality and vision.
             </motion.p>
@@ -291,36 +470,26 @@ const AboutUs = () => {
               'https://ahmedabadinktattoo.com/wp-content/uploads/2025/01/2023-10-10.jpg',
               'https://ahmedabadinktattoo.com/wp-content/uploads/2024/12/AIK-1.jpg',
             ].map((src, index) => (
-              <motion.div
+              <FuturisticImage
                 key={index}
-                variants={imageVariants}
-                initial="hidden"
-                animate="visible"
-                whileHover="hover"
-                className="relative rounded-xl overflow-hidden border-2 border-primary/40"
-              >
-                <img
-                  src={src}
-                  alt={`Creativity Image ${index + 1}`}
-                  className="w-full h-64 object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-primary/30 to-transparent pointer-events-none" />
-              </motion.div>
+                src={src}
+                alt={`Creativity Image ${index + 1}`}
+                className="rounded-xl border-2 border-primary/40 h-64"
+                section="creativity"
+              />
             ))}
           </motion.div>
           <motion.p
             variants={textVariants}
-            className="text-lg text-gray-300 max-w-4xl mx-auto text-center"
-            style={{ fontFamily: "'Open Sans', sans-serif'" }}
+            className="text-lg text-gray-300 max-w-4xl mx-auto text-center font-openSans"
           >
             Every tattoo we create is a journey—a fusion of your vision and our artistry, designed to resonate for generations.
           </motion.p>
         </div>
       </section>
 
-      {/* Tattoo Technology Section */}
       <section ref={sectionRefs.tech} className="py-12 bg-gradient-to-r from-black to-gray-900 relative overflow-hidden">
-        <div className="container-custom relative z-10">
+        <div className="container mx-auto px-4 relative z-10">
           <motion.div
             initial="hidden"
             animate={isInView.tech ? 'visible' : 'hidden'}
@@ -329,15 +498,14 @@ const AboutUs = () => {
           >
             <motion.h2
               variants={textVariants}
-              className="text-4xl md:text-6xl font-serif font-bold mb-6"
-              style={{ fontFamily: "'Dosis', sans-serif'", textShadow: '0 0 20px rgba(196, 30, 58, 0.6)' }}
+              className="text-4xl md:text-6xl font-dosis font-bold mb-6"
+              style={{ textShadow: '0 0 20px rgba(196, 30, 58, 0.6)' }}
             >
               Next-Gen <span className="text-primary">Tattoo Tech</span>
             </motion.h2>
             <motion.p
               variants={textVariants}
-              className="text-xl text-gray-300 max-w-4xl mx-auto"
-              style={{ fontFamily: "'Open Sans', sans-serif'" }}
+              className="text-xl text-gray-300 max-w-4xl mx-auto font-openSans"
             >
               We’re committed to maintaining the highest standards of hygiene and safety, ensuring that every visit to our studio is as comfortable as it is memorable. Experience the future with our innovative tattoo technology.
             </motion.p>
@@ -365,30 +533,29 @@ const AboutUs = () => {
             ].map((tech, index) => (
               <motion.div
                 key={index}
-                variants={imageVariants}
+                variants={{
+                  hidden: { opacity: 0, scale: 0.9 },
+                  visible: { opacity: 1, scale: 1, transition: { duration: 0.8, ease: 'easeOut' } },
+                  hover: { scale: 1.05, transition: { duration: 0.4, ease: 'easeOut' } }
+                }}
                 initial="hidden"
                 animate="visible"
                 whileHover="hover"
                 className="bg-gray-900/70 p-6 rounded-xl border-2 border-primary/40 backdrop-blur-sm"
               >
-                <div className="relative mb-4 rounded-lg overflow-hidden">
-                  <img
-                    src={tech.image}
-                    alt={tech.title}
-                    className="w-full h-48 object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent pointer-events-none" />
-                </div>
+                <FuturisticImage
+                  src={tech.image}
+                  alt={tech.title}
+                  className="rounded-lg mb-4 h-48"
+                  section="tech"
+                />
                 <h3
-                  className="text-xl font-bold mb-2"
-                  style={{ fontFamily: "'Dosis', sans-serif'", textShadow: '0 0 10px rgba(196, 30, 58, 0.3)' }}
+                  className="text-xl font-bold mb-2 font-dosis"
+                  style={{ textShadow: '0 0 10px rgba(196, 30, 58, 0.3)' }}
                 >
                   {tech.title}
                 </h3>
-                <p
-                  className="text-gray-400"
-                  style={{ fontFamily: "'Open Sans', sans-serif'" }}
-                >
+                <p className="text-gray-400 font-openSans">
                   {tech.description}
                 </p>
               </motion.div>
@@ -397,10 +564,9 @@ const AboutUs = () => {
         </div>
       </section>
 
-      {/* Futuristic Timeline Section */}
       <section ref={sectionRefs.timeline} className="py-12 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-black to-gray-900 opacity-90"></div>
-        <div className="container-custom relative z-10">
+        <div className="container mx-auto px-4 relative z-10">
           <motion.div
             initial="hidden"
             animate={isInView.timeline ? 'visible' : 'hidden'}
@@ -409,15 +575,14 @@ const AboutUs = () => {
           >
             <motion.h2
               variants={textVariants}
-              className="text-4xl md:text-6xl font-serif font-bold mb-6"
-              style={{ fontFamily: "'Dosis', sans-serif'", textShadow: '0 0 20px rgba(196, 30, 58, 0.6)' }}
+              className="text-4xl md:text-6xl font-dosis font-bold mb-6"
+              style={{ textShadow: '0 0 20px rgba(196, 30, 58, 0.6)' }}
             >
               Our Journey <span className="text-primary">Through Time</span>
             </motion.h2>
             <motion.p
               variants={textVariants}
-              className="text-xl text-gray-300 max-w-4xl mx-auto"
-              style={{ fontFamily: "'Open Sans', sans-serif'" }}
+              className="text-xl text-gray-300 max-w-4xl mx-auto font-openSans"
             >
               A timeline of Ahmedabad Ink Tattoo’s evolution into the future of tattoo artistry.
             </motion.p>
@@ -454,16 +619,10 @@ const AboutUs = () => {
                 className={`flex items-center mb-12 ${item.side === 'left' ? 'flex-row' : 'flex-row-reverse'} justify-between`}
               >
                 <div className={`w-5/12 ${item.side === 'left' ? 'text-right' : 'text-left'}`}>
-                  <h3
-                    className="text-2xl font-bold text-primary"
-                    style={{ fontFamily: "'Dosis', sans-serif'" }}
-                  >
+                  <h3 className="text-2xl font-bold text-primary font-dosis">
                     {item.year}
                   </h3>
-                  <p
-                    className="text-gray-300"
-                    style={{ fontFamily: "'Open Sans', sans-serif'" }}
-                  >
+                  <p className="text-gray-300 font-openSans">
                     {item.event}
                   </p>
                 </div>
@@ -475,10 +634,9 @@ const AboutUs = () => {
         </div>
       </section>
 
-      {/* Holographic Experience Section */}
       <section ref={sectionRefs.hologram} className="py-12 relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://ahmedabadinktattoo.com/wp-content/uploads/2024/12/IMG_8298-2048x1952.jpg')] bg-cover bg-center opacity-10" />
-        <div className="container-custom relative z-10">
+        <div className="container mx-auto px-4 relative z-10">
           <motion.div
             initial="hidden"
             animate={isInView.hologram ? 'visible' : 'hidden'}
@@ -487,45 +645,37 @@ const AboutUs = () => {
           >
             <motion.h2
               variants={textVariants}
-              className="text-4xl md:text-6xl font-serif font-bold mb-6"
-              style={{ fontFamily: "'Dosis', sans-serif'", textShadow: '0 0 20px rgba(196, 30, 58, 0.6)' }}
+              className="text-4xl md:text-6xl font-dosis font-bold mb-6"
+              style={{ textShadow: '0 0 20px rgba(196, 30, 58, 0.6)' }}
             >
               Holographic <span className="text-primary">Experience</span>
             </motion.h2>
             <motion.p
               variants={textVariants}
-              className="text-xl text-gray-300 max-w-4xl mx-auto"
-              style={{ fontFamily: "'Open Sans', sans-serif'" }}
+              className="text-xl text-gray-300 max-w-4xl mx-auto font-openSans"
             >
               Step into our studio and experience your tattoo design in a holographic preview, blending art with futuristic technology.
             </motion.p>
           </motion.div>
-          <motion.div
-            variants={imageVariants}
-            initial="hidden"
-            animate="visible"
-            whileHover="hover"
-            className="relative max-w-3xl mx-auto rounded-xl overflow-hidden border-4 border-primary/50"
-          >
-            <img
+          <div className="relative max-w-3xl mx-auto">
+            <FuturisticImage
               src="https://ahmedabadinktattoo.com/wp-content/uploads/2024/12/ramgarhia-tattoos-studio-chhabewal-hoshiarpur-tattoo-artists-j66c8ikzwr-1536x1152.avif"
               alt="Holographic Preview"
-              className="w-full h-96 object-cover"
+              className="rounded-xl border-4 border-primary/50 h-96"
+              section="hologram"
             />
             <motion.div
-              className="absolute inset-0 border-2 border-primary/30 m-2 rounded-lg"
+              className="absolute inset-0 border-2 border-primary/30 m-2 rounded-lg pointer-events-none"
               variants={glowVariants}
               initial="hidden"
               animate="visible"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent pointer-events-none" />
-          </motion.div>
+          </div>
         </div>
       </section>
 
-      {/* Expanded Gallery Section */}
       <section ref={sectionRefs.gallery} className="py-12 relative">
-        <div className="container-custom">
+        <div className="container mx-auto px-4">
           <motion.div
             initial="hidden"
             animate={isInView.gallery ? 'visible' : 'hidden'}
@@ -534,15 +684,14 @@ const AboutUs = () => {
           >
             <motion.h2
               variants={textVariants}
-              className="text-4xl md:text-6xl font-serif font-bold mb-6"
-              style={{ fontFamily: "'Dosis', sans-serif'", textShadow: '0 0 20px rgba(196, 30, 58, 0.6)' }}
+              className="text-4xl md:text-6xl font-dosis font-bold mb-6"
+              style={{ textShadow: '0 0 20px rgba(196, 30, 58, 0.6)' }}
             >
               Our <span className="text-primary">Futuristic Gallery</span>
             </motion.h2>
             <motion.p
               variants={textVariants}
-              className="text-xl text-gray-300 max-w-4xl mx-auto"
-              style={{ fontFamily: "'Open Sans', sans-serif'" }}
+              className="text-xl text-gray-300 max-w-4xl mx-auto font-openSans"
             >
               Explore the future of tattoo artistry through our stunning creations.
             </motion.p>
@@ -561,33 +710,21 @@ const AboutUs = () => {
               "https://ahmedabadinktattoo.com/wp-content/uploads/2025/01/2023-10-10.jpg",
               "https://ahmedabadinktattoo.com/wp-content/uploads/2024/12/1000025683-1152x1536.jpeg",
               "https://ahmedabadinktattoo.com/wp-content/uploads/2025/01/2024-03-14-1.jpg",
-              "https://ahmedabadinktattoo.com/wp-content/uploads/2024/12/AIK-1.jpg", // Repeated to extend length
-              "https://ahmedabadinktattoo.com/wp-content/uploads/2024/12/AiK-2-768x1367.jpg", // Repeated
-              "https://ahmedabadinktattoo.com/wp-content/uploads/2024/12/IMG_8298-2048x1952.jpg", // Repeated
             ].map((img, index) => (
-              <motion.div
+              <FuturisticImage
                 key={index}
-                variants={imageVariants}
-                initial="hidden"
-                animate="visible"
-                whileHover="hover"
-                className="relative rounded-xl overflow-hidden border-2 border-primary/40"
-              >
-                <img
-                  src={img}
-                  alt={`Gallery ${index + 1}`}
-                  className="w-full h-64 object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent pointer-events-none" />
-              </motion.div>
+                src={img}
+                alt={`Gallery ${index + 1}`}
+                className="rounded-xl border-2 border-primary/40 h-64"
+                section="gallery"
+              />
             ))}
           </motion.div>
         </div>
       </section>
 
-      {/* CTA Section */}
       <section ref={sectionRefs.cta} className="py-12 bg-gradient-to-b from-black to-gray-900 relative">
-        <div className="container-custom text-center">
+        <div className="container mx-auto px-4 text-center">
           <motion.div
             initial="hidden"
             animate={isInView.cta ? 'visible' : 'hidden'}
@@ -596,15 +733,14 @@ const AboutUs = () => {
           >
             <motion.h2
               variants={textVariants}
-              className="text-4xl md:text-6xl font-serif font-bold mb-6"
-              style={{ fontFamily: "'Dosis', sans-serif'", textShadow: '0 0 20px rgba(196, 30, 58, 0.6)' }}
+              className="text-4xl md:text-6xl font-dosis font-bold mb-6"
+              style={{ textShadow: '0 0 20px rgba(196, 30, 58, 0.6)' }}
             >
               Enter the <span className="text-primary">Future of Art</span>
             </motion.h2>
             <motion.p
               variants={textVariants}
-              className="text-xl text-gray-300 mb-8"
-              style={{ fontFamily: "'Open Sans', sans-serif'" }}
+              className="text-xl text-gray-300 mb-8 font-openSans"
             >
               Join us at Ahmedabad Ink Tattoo and let’s create a masterpiece that defines the future of tattooing.
             </motion.p>
@@ -612,8 +748,7 @@ const AboutUs = () => {
               href="#contact"
               whileHover={{ scale: 1.2, boxShadow: '0 0 40px rgba(196, 30, 58, 0.9)' }}
               whileTap={{ scale: 0.95 }}
-              className="inline-flex items-center bg-primary text-white py-4 px-10 rounded-xl font-medium border-2 border-primary/70 hover:bg-transparent hover:text-primary transition-all duration-500"
-              style={{ fontFamily: "'Open Sans', sans-serif'" }}
+              className="inline-flex items-center bg-primary text-white py-4 px-10 rounded-xl font-medium border-2 border-primary/70 hover:bg-transparent hover:text-primary transition-all duration-500 font-openSans"
             >
               Book Your Session
               <FaArrowRight className="ml-3" />

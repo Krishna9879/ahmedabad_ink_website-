@@ -13,6 +13,7 @@ import Contact from './pages/Contactpage'
 import TattooRemoval from './pages/TattooRemoval'
 import Portfolio from './pages/Portfolio'
 import FAQ from './pages/faq'
+import Academic from './pages/AcademicPage'
 
 function App() {
   useEffect(() => {
@@ -37,11 +38,13 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/faqs" element={<FAQ />} />
             <Route path="/portfolio" element={<Portfolio />} />
+          
             <Route path="/about" element={<AboutUs />} />
             <Route path="/offers" element={<Offers />} />
             <Route path="/servicespage" element={<Services />} />
             <Route path="/contactpage" element={<Contact />} />
               <Route path="/tattooRemoval" element={<TattooRemoval />} />
+                <Route path="/academic" element={<Academic />} />
           </Routes>
           
           <Footer />

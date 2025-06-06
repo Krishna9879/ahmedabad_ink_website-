@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaBars, FaTimes, FaAngleDown } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 // Create a motion-enhanced Link component
 const MotionLink = motion(Link);
@@ -11,6 +11,12 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
   const [timeoutId, setTimeoutId] = useState(null);
+  const location = useLocation();
+
+  // Scroll to top on route change
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
 
   // Handle scroll effect for navbar background
   useEffect(() => {
@@ -28,10 +34,11 @@ const Navbar = () => {
     { name: 'OFFERS', href: '/offers' },
     { name: 'PORTFOLIO', href: '/portfolio' },
     {
-      name: 'Services',
+      name: 'SERVICES',
       href: '/servicespage',
       subLinks: [
         { name: 'CUSTOM TATTOO', href: '/servicespage' },
+        { name: 'ACADEMICS', href: '/academic' },
         { name: 'TATTOO REMOVAL', href: '/tattooRemoval' },
       ],
     },
@@ -101,7 +108,7 @@ const Navbar = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="text-lg md:text-xl font-bold text-white"
-              style={{ fontFamily: "'Dosis', sans-serif'" }}
+              style={{ fontFamily: "'Dosis', sans-serif" }}
             >
               <span className="text-primary">AHMEDABAD</span> INK TATTOO
             </MotionLink>
@@ -168,7 +175,7 @@ const Navbar = () => {
                 whileHover={{ scale: 1.05, backgroundColor: '#8A0303' }}
                 whileTap={{ scale: 0.95 }}
                 className="ml-4 px-6 py-2 bg-primary text-white rounded-full text-sm font-medium transition-all duration-300 shadow-lg hover:shadow-primary/20 whitespace-nowrap"
-                style={{ fontFamily: "'Open Sans', sans-serif'" }}
+                style={{ fontFamily: "'Open Sans', sans-serif" }}
               >
                 Book Now
               </MotionLink>

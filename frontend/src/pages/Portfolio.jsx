@@ -2,6 +2,12 @@ import { useRef, useState, useEffect } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { FaArrowRight, FaFacebookF, FaTwitter, FaYoutube, FaInstagram, FaPhone, FaEnvelope, FaMapMarkerAlt, FaStar, FaPaintBrush, FaShapes, FaPalette, FaUser, FaShieldAlt, FaHeart } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import img1 from '../assets/cloudimage1.webp';
+import img2 from '../assets/cloudimage2.webp';
+import img3 from '../assets/demo2.webp';
+import img4 from '../assets/cloudimage4.jpeg';
+import img5 from '../assets/insta_image5.jpg';
+import img6 from '../assets/insta_image2.jpg';
 
 const Portfolio = () => {
   const sectionRefs = {
@@ -57,11 +63,14 @@ const Portfolio = () => {
     }
   };
 
-  const parallaxVariants = {
-    hidden: { y: 0 },
-    visible: {
-      y: -20,
-      transition: { duration: 8, repeat: Infinity, repeatType: 'reverse', ease: 'easeInOut' }
+  const floatingVariants = {
+    floating: {
+      y: [0, -15, 0],
+      transition: {
+        duration: 3,
+        repeat: Infinity,
+        ease: "easeInOut"
+      }
     }
   };
 
@@ -101,6 +110,22 @@ const Portfolio = () => {
 
     const interval = setInterval(animateParticles, 50);
     return () => clearInterval(interval);
+  }, []);
+
+  // Ink Droplet Animation for Custom Tattoo Section
+  const [droplets, setDroplets] = useState([]);
+  useEffect(() => {
+    const newDroplets = [];
+    for (let i = 0; i < 12; i++) {
+      newDroplets.push({
+        id: i,
+        x: Math.random() * 100,
+        y: Math.random() * 100,
+        size: Math.random() * 20 + 10,
+        delay: Math.random() * 2
+      });
+    }
+    setDroplets(newDroplets);
   }, []);
 
   // Slider Logic for Featured Works
@@ -150,43 +175,21 @@ const Portfolio = () => {
             }}
           />
         ))}
-        {/* Circuit Lines */}
-        {[...Array(15)].map((_, i) => (
-          <motion.div
-            key={`circuit-${i}`}
-            className={`absolute ${i % 2 === 0 ? 'w-full h-0.5' : 'h-full w-0.5'} bg-primary/10`}
-            initial={{
-              left: i % 2 === 0 ? 0 : (i * 5) + 'vw',
-              top: i % 2 === 0 ? (i * 5) + 'vh' : 0,
-              opacity: 0.3
-            }}
-            animate={{
-              opacity: [0.3, 0.8, 0.3],
-              transition: { duration: 5, repeat: Infinity, delay: Math.random() * 3 }
-            }}
-          />
-        ))}
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-primary/20 to-black/90 opacity-80" />
-        {/* Decorative Tattoo Pattern */}
+        
+        {/* Geometric Pattern */}
         <svg
-          className="absolute inset-0 opacity-10"
+          className="absolute inset-0 opacity-5"
           width="100%"
           height="100%"
           xmlns="http://www.w3.org/2000/svg"
         >
           <defs>
-            <pattern id="tattoo-pattern" x="0" y="0" width="200" height="200" patternUnits="userSpaceOnUse">
-              <path
-                d="M50,50 Q75,25 100,50 T150,50 Q175,75 150,100 T100,150 Q75,175 50,150 T0,100 Q25,75 50,50 Z"
-                fill="none"
-                stroke="#C41E3A"
-                strokeWidth="1"
-                opacity="0.3"
-              />
+            <pattern id="geometric-pattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+              <path d="M0,0 L100,100 M100,0 L0,100" stroke="#888" strokeWidth="1" opacity="0.2" />
+              <circle cx="50" cy="50" r="20" fill="none" stroke="#888" strokeWidth="1" opacity="0.2" />
             </pattern>
           </defs>
-          <rect x="0" y="0" width="100%" height="100%" fill="url(#tattoo-pattern)" />
+          <rect x="0" y="0" width="100%" height="100%" fill="url(#geometric-pattern)" />
         </svg>
       </div>
 
@@ -194,9 +197,8 @@ const Portfolio = () => {
       <section ref={sectionRefs.header} className="relative pt-24 pb-16 flex items-center justify-center overflow-hidden min-h-[600px]">
         <motion.div
           className="absolute inset-0 z-0"
-          variants={parallaxVariants}
-          initial="hidden"
-          animate="visible"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1, transition: { duration: 1 } }}
         >
           <div className="absolute inset-0 bg-gradient-to-b from-black/90 to-gray-900/90" />
           <svg
@@ -210,14 +212,14 @@ const Portfolio = () => {
                 <path
                   d="M150,150 m-50,0 a50,50 0 1,0 100,0 a50,50 0 1,0 -100,0 M150,150 m-70,0 a70,70 0 1,0 140,0 a70,70 0 1,0 -140,0 M150,150 m-90,0 a90,90 0 1,0 180,0 a90,90 0 1,0 -180,0"
                   fill="none"
-                  stroke="#C41E3A"
+                  stroke="#888"
                   strokeWidth="2"
                   opacity="0.5"
                 />
                 <path
                   d="M150,150 L120,120 M150,150 L180,120 M150,150 L120,180 M150,150 L180,180"
                   fill="none"
-                  stroke="#C41E3A"
+                  stroke="#888"
                   strokeWidth="2"
                   opacity="0.5"
                 />
@@ -226,11 +228,13 @@ const Portfolio = () => {
             <rect x="0" y="0" width="100%" height="100%" fill="url(#mandala-pattern)" />
           </svg>
         </motion.div>
+        
         <motion.div
           className="absolute inset-0 border-4 border-primary/30 m-2 rounded-xl"
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1, transition: { duration: 1, repeat: Infinity, repeatType: 'reverse' } }}
         />
+        
         <motion.div
           initial="hidden"
           animate={isInView.header ? 'visible' : 'hidden'}
@@ -270,6 +274,7 @@ const Portfolio = () => {
               </div>
             </motion.div>
           </div>
+          
           <motion.div
             className="mt-8 p-6 bg-black/70 rounded-lg border-2 border-primary/30"
             style={{ boxShadow: '0 0 20px rgba(196, 30, 58, 0.5)' }}
@@ -305,10 +310,30 @@ const Portfolio = () => {
 
       {/* Portfolio Section */}
       <section ref={sectionRefs.portfolio} className="py-16 relative">
-        <div
-          className="absolute inset-0 bg-gradient-radial from-primary/10 via-transparent to-transparent opacity-50"
-          style={{ background: 'radial-gradient(circle, rgba(196, 30, 58, 0.1) 0%, transparent 70%)' }}
-        />
+        {/* Floating dots animation */}
+        <div className="absolute inset-0 pointer-events-none">
+          {[...Array(15)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-2 h-2 bg-primary/20 rounded-full"
+              initial={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                opacity: 0.3
+              }}
+              animate={{
+                y: [0, -30, 0],
+                opacity: [0.3, 0.8, 0.3],
+                transition: {
+                  duration: 3 + Math.random() * 4,
+                  repeat: Infinity,
+                  delay: Math.random() * 2
+                }
+              }}
+            />
+          ))}
+        </div>
+        
         <div className="container-custom max-w-5xl mx-auto relative z-10 px-4">
           <motion.div
             initial="hidden"
@@ -324,7 +349,12 @@ const Portfolio = () => {
               <span className="absolute bottom-0 left-0 w-full h-0.5 bg-primary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-center"></span>
             </motion.h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {[
+              {[img1,
+                img2,
+                img3,
+                img4,
+                img5,
+                img6,
                 "https://ahmedabadinktattoo.com/wp-content/uploads/2024/12/IMG20180604080023-1152x1536.jpg",
                 "https://ahmedabadinktattoo.com/wp-content/uploads/2024/12/1000026027-1152x1536.jpeg",
                 "https://ahmedabadinktattoo.com/wp-content/uploads/2024/12/1000025709-1152x1536.jpeg",
@@ -337,6 +367,7 @@ const Portfolio = () => {
                 "https://ahmedabadinktattoo.com/wp-content/uploads/2024/12/13E9A31F-1731-4882-A054-33D8F093DEAD.jpg",
                 "https://ahmedabadinktattoo.com/wp-content/uploads/2024/12/8E737CDC-6B7D-44E9-9ED5-7EE82BB5EA76-1152x1536.jpg",
                 "https://ahmedabadinktattoo.com/wp-content/uploads/2024/12/1000025658-1152x1536.jpeg",
+                
               ].map((img, index) => (
                 <motion.div
                   key={index}
@@ -371,10 +402,33 @@ const Portfolio = () => {
 
       {/* Custom Tattoo Section */}
       <section ref={sectionRefs.customTattoo} className="py-16 relative">
-        <div
-          className="absolute inset-0 bg-gradient-radial from-primary/10 via-transparent to-transparent opacity-50"
-          style={{ background: 'radial-gradient(circle, rgba(196, 30, 58, 0.1) 0%, transparent 70%)' }}
-        />
+        {/* Ink Droplet Animation */}
+        <div className="absolute inset-0 pointer-events-none">
+          {droplets.map((droplet) => (
+            <motion.div
+              key={droplet.id}
+              className="absolute rounded-full bg-primary/10"
+              style={{
+                left: `${droplet.x}%`,
+                top: `${droplet.y}%`,
+                width: `${droplet.size}px`,
+                height: `${droplet.size}px`,
+              }}
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{
+                opacity: [0, 0.3, 0],
+                scale: [0, 1, 1.5],
+                transition: {
+                  duration: 4,
+                  repeat: Infinity,
+                  delay: droplet.delay,
+                  ease: "easeOut"
+                }
+              }}
+            />
+          ))}
+        </div>
+        
         <div className="container-custom max-w-5xl mx-auto relative z-10 px-4">
           <motion.div
             initial="hidden"
@@ -394,7 +448,7 @@ const Portfolio = () => {
               className="text-lg text-gray-300 max-w-3xl mx-auto mb-8 text-center"
               style={{ fontFamily: "'Open Sans', sans-serif'" }}
             >
-              We specialize in creating unique, custom tattoos tailored to your personality and vision. Whether you’re looking for a minimalist design, intricate realism, or bold traditional art, we bring your ideas to life.
+              We specialize in creating unique, custom tattoos tailored to your personality and vision. Whether you're looking for a minimalist design, intricate realism, or bold traditional art, we bring your ideas to life.
             </motion.p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <motion.div
@@ -510,10 +564,6 @@ const Portfolio = () => {
 
       {/* Featured Works Slider Section */}
       <section ref={sectionRefs.slider} className="py-16 relative">
-        <div
-          className="absolute inset-0 bg-gradient-radial from-primary/10 via-transparent to-transparent opacity-50"
-          style={{ background: 'radial-gradient(circle, rgba(196, 30, 58, 0.1) 0%, transparent 70%)' }}
-        />
         <div className="container-custom max-w-5xl mx-auto relative z-10 px-4">
           <motion.div
             initial="hidden"
@@ -522,6 +572,7 @@ const Portfolio = () => {
           >
             <motion.h2
               variants={textVariants}
+              animate="floating"
               className="text-3xl md:text-4xl font-bold mb-8 text-center relative inline-block"
               style={{ fontFamily: "'Dosis', sans-serif'", color: '#ffffff', textShadow: '0 0 25px rgba(196, 30, 58, 0.7)' }}
             >
@@ -592,10 +643,27 @@ const Portfolio = () => {
 
       {/* Why Choose Us Section */}
       <section ref={sectionRefs.whyChoose} className="py-16 relative">
-        <div
-          className="absolute inset-0 bg-gradient-radial from-primary/10 via-transparent to-transparent opacity-50"
-          style={{ background: 'radial-gradient(circle, rgba(196, 30, 58, 0.1) 0%, transparent 70%)' }}
-        />
+        <motion.div
+          className="absolute inset-0"
+          animate="floating"
+          variants={floatingVariants}
+        >
+          <svg
+            className="absolute inset-0 opacity-10"
+            width="100%"
+            height="100%"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <defs>
+              <pattern id="diamond-pattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+                <path d="M0,0 L100,100 M100,0 L0,100" stroke="#888" strokeWidth="1" opacity="0.2" />
+                <rect x="40" y="40" width="20" height="20" fill="none" stroke="#888" strokeWidth="1" opacity="0.2" />
+              </pattern>
+            </defs>
+            <rect x="0" y="0" width="100%" height="100%" fill="url(#diamond-pattern)" />
+          </svg>
+        </motion.div>
+        
         <div className="container-custom max-w-5xl mx-auto relative z-10 px-4">
           <motion.div
             initial="hidden"
@@ -604,6 +672,7 @@ const Portfolio = () => {
           >
             <motion.h2
               variants={textVariants}
+              animate="floating"
               className="text-3xl md:text-4xl font-bold mb-8 text-center relative inline-block"
               style={{ fontFamily: "'Dosis', sans-serif'", color: '#ffffff', textShadow: '0 0 25px rgba(196, 30, 58, 0.7)' }}
             >
@@ -616,7 +685,7 @@ const Portfolio = () => {
                 initial="hidden"
                 animate="visible"
                 whileHover="hover"
-                className="flex items-start space-x-4 p-6 rounded-lg border-2 border-primary/30 min-h-[150px]"
+                className="flex items-start space-x-4 p-6 rounded-lg border-2 border-primary/30 min-h-[120px]"
                 style={{ boxShadow: 'inset 0 0 10px rgba(196, 30, 58, 0.4)' }}
               >
                 <FaUser className="text-primary text-2xl mt-1" />
@@ -640,7 +709,7 @@ const Portfolio = () => {
                 initial="hidden"
                 animate="visible"
                 whileHover="hover"
-                className="flex items-start space-x-4 p-6 rounded-lg border-2 border-primary/30 min-h-[150px]"
+                className="flex items-start space-x-4 p-6 rounded-lg border-2 border-primary/30 min-h-[120px]"
                 style={{ boxShadow: 'inset 0 0 10px rgba(196, 30, 58, 0.4)' }}
               >
                 <FaShieldAlt className="text-primary text-2xl mt-1" />
@@ -664,7 +733,7 @@ const Portfolio = () => {
                 initial="hidden"
                 animate="visible"
                 whileHover="hover"
-                className="flex items-start space-x-4 p-6 rounded-lg border-2 border-primary/30 min-h-[150px]"
+                className="flex items-start space-x-4 p-6 rounded-lg border-2 border-primary/30 min-h-[120px]"
                 style={{ boxShadow: 'inset 0 0 10px rgba(196, 30, 58, 0.4)' }}
               >
                 <FaHeart className="text-primary text-2xl mt-1" />
@@ -688,7 +757,7 @@ const Portfolio = () => {
                 initial="hidden"
                 animate="visible"
                 whileHover="hover"
-                className="flex items-start space-x-4 p-6 rounded-lg border-2 border-primary/30 min-h-[150px]"
+                className="flex items-start space-x-4 p-6 rounded-lg border-2 border-primary/30 min-h-[120px]"
                 style={{ boxShadow: 'inset 0 0 10px rgba(196, 30, 58, 0.4)' }}
               >
                 <FaPaintBrush className="text-primary text-2xl mt-1" />
@@ -724,10 +793,6 @@ const Portfolio = () => {
 
       {/* Testimonials Section */}
       <section ref={sectionRefs.testimonials} className="py-16 relative">
-        <div
-          className="absolute inset-0 bg-gradient-radial from-primary/10 via-transparent to-transparent opacity-50"
-          style={{ background: 'radial-gradient(circle, rgba(196, 30, 58, 0.1) 0%, transparent 70%)' }}
-        />
         <div className="container-custom max-w-5xl mx-auto relative z-10 px-4">
           <motion.div
             initial="hidden"
@@ -736,6 +801,7 @@ const Portfolio = () => {
           >
             <motion.h2
               variants={textVariants}
+              animate="floating"
               className="text-3xl md:text-4xl font-bold mb-8 text-center relative inline-block"
               style={{ fontFamily: "'Dosis', sans-serif'", color: '#ffffff', textShadow: '0 0 25px rgba(196, 30, 58, 0.7)' }}
             >
@@ -744,7 +810,7 @@ const Portfolio = () => {
             </motion.h2>
             <motion.div
               variants={textVariants}
-              className="flex justify-center items-center mb-6"
+              className="flex items-center justify-center mb-6"
             >
               <span className="text-lg text-gray-300 mr-2" style={{ fontFamily: "'Open Sans', sans-serif'" }}>
                 EXCELLENT
@@ -821,7 +887,7 @@ const Portfolio = () => {
       </div>
 
       {/* Contact Section */}
-      <section ref={sectionRefs.contact} className="py-16 bg-gradient-to-b from-black to-gray-900 relative">
+      <section ref={sectionRefs.contact} className="py-16 relative">
         <div className="container-custom max-w-5xl mx-auto relative z-10 px-4">
           <motion.div
             initial="hidden"
@@ -831,6 +897,7 @@ const Portfolio = () => {
           >
             <motion.h2
               variants={textVariants}
+              animate="floating"
               className="text-3xl md:text-4xl font-bold mb-8 relative inline-block"
               style={{ fontFamily: "'Dosis', sans-serif'", color: '#ffffff', textShadow: '0 0 25px rgba(196, 30, 58, 0.7)' }}
             >
@@ -885,10 +952,6 @@ const Portfolio = () => {
 
       {/* Call to Action Section */}
       <section className="py-16 relative">
-        <div
-          className="absolute inset-0 bg-gradient-radial from-primary/10 via-transparent to-transparent opacity-50"
-          style={{ background: 'radial-gradient(circle, rgba(196, 30, 58, 0.1) 0%, transparent 70%)' }}
-        />
         <div className="container-custom max-w-5xl mx-auto relative z-10 px-4">
           <motion.div
             initial="hidden"
@@ -898,6 +961,7 @@ const Portfolio = () => {
           >
             <motion.h2
               variants={textVariants}
+              animate="floating"
               className="text-3xl md:text-4xl font-bold mb-4 relative inline-block"
               style={{ fontFamily: "'Dosis', sans-serif'", color: '#ffffff', textShadow: '0 0 25px rgba(196, 30, 58, 0.7)' }}
             >

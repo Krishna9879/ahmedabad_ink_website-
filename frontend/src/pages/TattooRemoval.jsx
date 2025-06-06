@@ -21,7 +21,11 @@ const TattooRemoval = () => {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 1, ease: 'easeOut' }
+      transition: { 
+        duration: 0.8, 
+        ease: 'easeOut',
+        staggerChildren: 0.1
+      }
     }
   };
 
@@ -38,12 +42,38 @@ const TattooRemoval = () => {
     visible: {
       opacity: 1,
       scale: 1,
-      transition: { duration: 0.8, ease: 'easeOut' }
+      transition: { duration: 0.6, ease: 'easeOut' }
     },
     hover: {
-      scale: 1.03,
-      boxShadow: '0 0 20px rgba(196, 30, 58, 0.6)',
+      scale: 1.05,
+      boxShadow: '0 0 25px rgba(196, 30, 58, 0.6)',
       transition: { duration: 0.3 }
+    }
+  };
+
+  // Floating animation for stars
+  const starVariants = {
+    float: {
+      y: [0, -10, 0],
+      opacity: [0.2, 0.8, 0.2],
+      transition: {
+        duration: 3 + Math.random() * 5,
+        repeat: Infinity,
+        ease: "easeInOut"
+      }
+    }
+  };
+
+  // Circuit line animation
+  const circuitVariants = {
+    hidden: { pathLength: 0 },
+    visible: {
+      pathLength: 1,
+      transition: {
+        duration: 2,
+        delay: Math.random() * 1.5,
+        ease: "easeInOut"
+      }
     }
   };
 
@@ -51,35 +81,57 @@ const TattooRemoval = () => {
     <div ref={ref} className="bg-black text-white relative overflow-hidden min-h-screen">
       {/* Starry Background with Circuit Lines, Gradient Overlay, and Decorative Pattern */}
       <div className="absolute inset-0 pointer-events-none">
-        {/* Stars */}
-        {[...Array(100)].map((_, i) => (
-          <div
+        {/* Stars with floating animation */}
+        {[...Array(150)].map((_, i) => (
+          <motion.div
             key={i}
             className="absolute w-1 h-1 bg-white rounded-full"
             style={{
               left: Math.random() * 100 + 'vw',
               top: Math.random() * 100 + 'vh',
-              opacity: Math.random() * 0.4 + 0.2
             }}
+            variants={starVariants}
+            animate="float"
           />
         ))}
-        {/* Circuit Lines */}
-        {[...Array(15)].map((_, i) => (
-          <div
-            key={`circuit-${i}`}
-            className={`absolute ${i % 2 === 0 ? 'w-full h-0.5' : 'h-full w-0.5'} bg-primary/10`}
-            style={{
-              left: i % 2 === 0 ? 0 : (i * 5) + 'vw',
-              top: i % 2 === 0 ? (i * 5) + 'vh' : 0,
-              opacity: 0.3
-            }}
-          />
-        ))}
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-primary/20 to-black/90 opacity-80" />
-        {/* Decorative Tattoo Pattern */}
+        
+        {/* Circuit Lines with draw animation */}
         <svg
-          className="absolute inset-0 opacity-10"
+          className="absolute inset-0"
+          width="100%"
+          height="100%"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          {[...Array(20)].map((_, i) => {
+            const isVertical = i % 3 === 0;
+            const x1 = isVertical ? (i * 5) : 0;
+            const y1 = isVertical ? 0 : (i * 5);
+            const x2 = isVertical ? (i * 5) : "100%";
+            const y2 = isVertical ? "100%" : (i * 5);
+            
+            return (
+              <motion.line
+                key={i}
+                x1={`${x1}%`}
+                y1={`${y1}%`}
+                x2={`${x2}%`}
+                y2={`${y2}%`}
+                stroke="rgba(196, 30, 58, 0.1)"
+                strokeWidth="0.5"
+                variants={circuitVariants}
+                initial="hidden"
+                animate="visible"
+              />
+            );
+          })}
+        </svg>
+        
+        {/* Gradient Overlay - REMOVED REDISH TONE */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-[#020024]/20 to-black/90 opacity-90" />
+        
+        {/* Decorative Tattoo Pattern - CHANGED TO RED */}
+        <svg
+          className="absolute inset-0 opacity-20"
           width="100%"
           height="100%"
           xmlns="http://www.w3.org/2000/svg"
@@ -99,11 +151,38 @@ const TattooRemoval = () => {
         </svg>
       </div>
 
+      {/* Floating particles with trails */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {[...Array(15)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-1 h-1 rounded-full"
+            style={{
+              background: 'radial-gradient(circle, rgba(196, 30, 58, 1) 0%, rgba(196, 30, 58, 0) 70%)',
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+            }}
+            animate={{
+              x: [0, (Math.random() - 0.5) * 200],
+              y: [0, (Math.random() - 0.5) * 200],
+              opacity: [0, 0.8, 0],
+              scale: [0, 1.5, 0],
+            }}
+            transition={{
+              duration: 4 + Math.random() * 6,
+              repeat: Infinity,
+              delay: Math.random() * 5,
+              ease: "easeInOut"
+            }}
+          />
+        ))}
+      </div>
+
       {/* Hero Section */}
       <section className="relative pt-24 pb-12 flex items-center justify-center overflow-hidden">
         <div
-          className="absolute inset-0 border-4 border-primary/20 m-4 rounded-2xl"
-          style={{ boxShadow: '0 0 20px rgba(196, 30, 58, 0.6)' }}
+          className="absolute inset-0 border-4 border-[#C41E3A]/20 m-4 rounded-2xl"
+          style={{ boxShadow: '0 0 20px rgba(196, 30, 58, 0.4)' }}
         />
         <motion.div
           initial="hidden"
@@ -115,51 +194,124 @@ const TattooRemoval = () => {
             variants={textVariants}
             className="flex items-center justify-center mb-6"
           >
-            <img
-              src="https://ahmedabadinktattoo.com/wp-content/uploads/2024/12/ahmedabad-ink-logo.jpg"
-              alt="Ahmedabad Ink Tattoo Logo"
-              className="w-24 md:w-32 mr-6"
-              style={{ boxShadow: '0 0 15px rgba(196, 30, 58, 0.4)' }}
-            />
-            <h1
+            {/* Floating logo with glow */}
+            <motion.div
+              animate={{ 
+                y: [0, -15, 0],
+                rotate: [0, 5, 0, -5, 0]
+              }}
+              transition={{ 
+                duration: 8, 
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            >
+              <img
+                src="https://ahmedabadinktattoo.com/wp-content/uploads/2024/12/ahmedabad-ink-logo.jpg"
+                alt="Ahmedabad Ink Tattoo Logo"
+                className="w-24 md:w-32 mr-6"
+                style={{ boxShadow: '0 0 15px rgba(196, 30, 58, 0.4)' }}
+              />
+            </motion.div>
+            
+            {/* Text glow animation */}
+            <motion.h1
               className="text-4xl md:text-6xl font-bold tracking-widest relative inline-block"
               style={{ fontFamily: "'Dosis', sans-serif'", color: '#ffffff', textShadow: '0 0 30px rgba(196, 30, 58, 0.8)' }}
+              animate={{
+                textShadow: [
+                  '0 0 10px rgba(196, 30, 58, 0.4)',
+                  '0 0 30px rgba(196, 30, 58, 0.8)',
+                  '0 0 50px rgba(196, 30, 58, 1)',
+                  '0 0 30px rgba(196, 30, 58, 0.8)',
+                  '0 0 10px rgba(196, 30, 58, 0.4)'
+                ]
+              }}
+              transition={{ 
+                duration: 4, 
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
             >
-              Tattoo <span className="text-primary">Removal</span>
-              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-primary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-center"></span>
-            </h1>
+              Tattoo <span className="text-[#C41E3A]">Removal</span>
+              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-[#C41E3A] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-center"></span>
+            </motion.h1>
           </motion.div>
+          
+          {/* Text cascade animation */}
           <motion.p
-            variants={textVariants}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ 
+              opacity: 1, 
+              y: 0,
+              textShadow: [
+                '0 0 5px rgba(255,255,255,0.1)',
+                '0 0 15px rgba(196, 30, 58, 0.3)',
+                '0 0 5px rgba(255,255,255,0.1)'
+              ]
+            }}
+            transition={{ 
+              duration: 0.8,
+              textShadow: {
+                duration: 3,
+                repeat: Infinity
+              }
+            }}
             className="text-lg text-gray-300 max-w-3xl mx-auto mb-8"
             style={{ fontFamily: "'Open Sans', sans-serif'" }}
           >
             Welcome to Ahmedabad Ink Tattoo Studio, your trusted partner for safe and effective tattoo removal. Whether you’re looking to remove an old tattoo, lighten it for a cover-up, or start fresh, our experienced team is here to help.
           </motion.p>
-          <motion.img
-            variants={textVariants}
-            src="https://ahmedabadinktattoo.com/wp-content/uploads/2025/01/360_F_961633344_ibjsrwSYnBbgbB7MPDIIVZjvjkoSHgvK.jpg"
-            alt="Tattoo Removal"
-            className="w-full max-w-lg mx-auto rounded-lg border-2 border-primary/30"
-            style={{ boxShadow: 'inset 0 0 15px rgba(196, 30, 58, 0.5), 0 0 20px rgba(196, 30, 58, 0.6)' }}
-          />
+          
+          {/* Floating image with glow */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ 
+              opacity: 1, 
+              scale: 1,
+              y: [0, -15, 0],
+              boxShadow: [
+                'inset 0 0 10px rgba(196, 30, 58, 0.3), 0 0 15px rgba(196, 30, 58, 0.4)',
+                'inset 0 0 20px rgba(196, 30, 58, 0.5), 0 0 30px rgba(196, 30, 58, 0.7)',
+                'inset 0 0 10px rgba(196, 30, 58, 0.3), 0 0 15px rgba(196, 30, 58, 0.4)'
+              ]
+            }}
+            transition={{ 
+              duration: 0.8,
+              y: {
+                duration: 6,
+                repeat: Infinity,
+                ease: "easeInOut"
+              },
+              boxShadow: {
+                duration: 4,
+                repeat: Infinity
+              }
+            }}
+          >
+            <img
+              src="https://ahmedabadinktattoo.com/wp-content/uploads/2025/01/360_F_961633344_ibjsrwSYnBbgbB7MPDIIVZjvjkoSHgvK.jpg"
+              alt="Tattoo Removal"
+              className="w-full max-w-lg mx-auto rounded-lg border-2 border-[#C41E3A]/30"
+            />
+          </motion.div>
         </motion.div>
       </section>
 
-      {/* Neon Divider */}
+      {/* Neon Divider - COLOR CHANGED TO RED */}
       <div className="relative max-w-5xl mx-auto px-4">
         <div
-          className="h-0.5 bg-primary/50"
-          style={{ boxShadow: '0 0 15px rgba(196, 30, 58, 0.5)' }}
+          className="h-0.5 bg-[#C41E3A]/50"
+          style={{ boxShadow: '0 0 15px rgba(196, 30, 58, 0.4)' }}
         >
-          <div className="h-0.5 bg-primary opacity-80" />
+          <div className="h-0.5 bg-[#C41E3A] opacity-80" />
         </div>
       </div>
 
       {/* How It Works Section */}
       <section ref={howItWorksRef} className="py-12 relative">
         <div
-          className="absolute inset-0 bg-gradient-radial from-primary/10 via-transparent to-transparent opacity-50"
+          className="absolute inset-0 bg-gradient-radial from-[#C41E3A]/10 via-transparent to-transparent opacity-50"
           style={{ background: 'radial-gradient(circle, rgba(196, 30, 58, 0.1) 0%, transparent 70%)' }}
         />
         <div className="container-custom max-w-5xl mx-auto relative z-10 px-4">
@@ -168,95 +320,93 @@ const TattooRemoval = () => {
             animate={isHowItWorksInView ? 'visible' : 'hidden'}
             variants={staggerChildren}
           >
+            {/* Glowing text animation */}
             <motion.h2
-              variants={textVariants}
               className="text-3xl md:text-4xl font-bold mb-8 text-center relative inline-block"
-              style={{ fontFamily: "'Dosis', sans-serif'", color: '#ffffff', textShadow: '0 0 25px rgba(196, 30, 58, 0.7)' }}
+              style={{ fontFamily: "'Dosis', sans-serif'", color: '#ffffff' }}
+              animate={{
+                textShadow: [
+                  '0 0 10px rgba(255,255,255,0.3)',
+                  '0 0 20px rgba(196, 30, 58, 0.6)',
+                  '0 0 30px rgba(196, 30, 58, 0.9)',
+                  '0 0 20px rgba(196, 30, 58, 0.6)',
+                  '0 0 10px rgba(255,255,255,0.3)'
+                ]
+              }}
+              transition={{ 
+                duration: 3, 
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
             >
-              How It <span className="text-primary">Works</span>
-              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-primary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-center"></span>
+              How It <span className="text-[#C41E3A]">Works</span>
+              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-[#C41E3A] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-center"></span>
             </motion.h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
               <motion.div variants={textVariants} className="space-y-6">
-                <motion.div
-                  variants={itemVariants}
-                  initial="hidden"
-                  animate="visible"
-                  whileHover="hover"
-                  className="flex items-start space-x-4 p-6 rounded-lg border-2 border-primary/30"
-                  style={{ boxShadow: 'inset 0 0 10px rgba(196, 30, 58, 0.4)' }}
-                >
-                  <FaCalendarCheck className="text-primary text-2xl mt-1" />
-                  <div>
-                    <h3
-                      className="text-xl font-semibold mb-2"
-                      style={{ fontFamily: "'Dosis', sans-serif'" }}
-                    >
-                      Step 1: Consultation
-                    </h3>
-                    <p
-                      className="text-gray-300"
-                      style={{ fontFamily: "'Open Sans', sans-serif'" }}
-                    >
-                      Begin with a free consultation where we assess your tattoo and discuss your expectations. We’ll explain the process, timeline, and expected results.
-                    </p>
-                  </div>
-                </motion.div>
-                <motion.div
-                  variants={itemVariants}
-                  initial="hidden"
-                  animate="visible"
-                  whileHover="hover"
-                  className="flex items-start space-x-4 p-6 rounded-lg border-2 border-primary/30"
-                  style={{ boxShadow: 'inset 0 0 10px rgba(196, 30, 58, 0.4)' }}
-                >
-                  <FaBolt className="text-primary text-2xl mt-1" />
-                  <div>
-                    <h3
-                      className="text-xl font-semibold mb-2"
-                      style={{ fontFamily: "'Dosis', sans-serif'" }}
-                    >
-                      Step 2: Laser Removal Process
-                    </h3>
-                    <p
-                      className="text-gray-300"
-                      style={{ fontFamily: "'Open Sans', sans-serif'" }}
-                    >
-                      Using advanced laser technology, we target the ink particles beneath your skin, breaking them down into smaller fragments that your body naturally eliminates.
-                    </p>
-                  </div>
-                </motion.div>
-                <motion.div
-                  variants={itemVariants}
-                  initial="hidden"
-                  animate="visible"
-                  whileHover="hover"
-                  className="flex items-start space-x-4 p-6 rounded-lg border-2 border-primary/30"
-                  style={{ boxShadow: 'inset 0 0 10px rgba(196, 30, 58, 0.4)' }}
-                >
-                  <FaHandsHelping className="text-primary text-2xl mt-1" />
-                  <div>
-                    <h3
-                      className="text-xl font-semibold mb-2"
-                      style={{ fontFamily: "'Dosis', sans-serif'" }}
-                    >
-                      Step 3: Aftercare
-                    </h3>
-                    <p
-                      className="text-gray-300"
-                      style={{ fontFamily: "'Open Sans', sans-serif'" }}
-                    >
-                      Proper aftercare is essential for healing and optimal results. We provide detailed aftercare instructions and support throughout your recovery journey.
-                    </p>
-                  </div>
-                </motion.div>
+                {[
+                  {
+                    icon: <FaCalendarCheck className="text-[#C41E3A] text-2xl mt-1" />,
+                    title: "Step 1: Consultation",
+                    content: "Begin with a free consultation where we assess your tattoo and discuss your expectations. We’ll explain the process, timeline, and expected results."
+                  },
+                  {
+                    icon: <FaBolt className="text-[#C41E3A] text-2xl mt-1" />,
+                    title: "Step 2: Laser Removal Process",
+                    content: "Using advanced laser technology, we target the ink particles beneath your skin, breaking them down into smaller fragments that your body naturally eliminates."
+                  },
+                  {
+                    icon: <FaHandsHelping className="text-[#C41E3A] text-2xl mt-1" />,
+                    title: "Step 3: Aftercare",
+                    content: "Proper aftercare is essential for healing and optimal results. We provide detailed aftercare instructions and support throughout your recovery journey."
+                  }
+                ].map((step, index) => (
+                  <motion.div
+                    key={index}
+                    variants={itemVariants}
+                    initial="hidden"
+                    animate="visible"
+                    whileHover="hover"
+                    className="flex items-start space-x-4 p-6 rounded-lg border-2 border-[#C41E3A]/30"
+                    style={{ boxShadow: 'inset 0 0 10px rgba(196, 30, 58, 0.3)' }}
+                  >
+                    {step.icon}
+                    <div>
+                      <h3
+                        className="text-xl font-semibold mb-2"
+                        style={{ fontFamily: "'Dosis', sans-serif'" }}
+                      >
+                        {step.title}
+                      </h3>
+                      <p
+                        className="text-gray-300"
+                        style={{ fontFamily: "'Open Sans', sans-serif'" }}
+                      >
+                        {step.content}
+                      </p>
+                    </div>
+                  </motion.div>
+                ))}
               </motion.div>
-              <motion.div variants={textVariants}>
+              
+              {/* Floating image with rotation */}
+              <motion.div 
+                variants={textVariants}
+                animate={{ 
+                  rotate: [0, 1, -1, 0],
+                  y: [0, -10, 0]
+                }}
+                transition={{ 
+                  duration: 8, 
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              >
                 <img
                   src="https://ahmedabadinktattoo.com/wp-content/uploads/2024/12/AiK-2-768x1367.jpg"
                   alt="Laser Tattoo Removal Process"
-                  className="w-full h-[600px] rounded-lg border-2 border-primary/30 object-contain"
-                  style={{ boxShadow: 'inset 0 0 15px rgba(196, 30, 58, 0.5), 0 0 20px rgba(196, 30, 58, 0.6)' }}
+                  className="w-full h-[600px] rounded-lg border-2 border-[#C41E3A]/30 object-contain"
+                  style={{ boxShadow: 'inset 0 0 15px rgba(196, 30, 58, 0.4), 0 0 20px rgba(196, 30, 58, 0.5)' }}
                 />
               </motion.div>
             </div>
@@ -264,20 +414,20 @@ const TattooRemoval = () => {
         </div>
       </section>
 
-      {/* Neon Divider */}
+      {/* Neon Divider - COLOR CHANGED TO RED */}
       <div className="relative max-w-5xl mx-auto px-4">
         <div
-          className="h-0.5 bg-primary/50"
-          style={{ boxShadow: '0 0 15px rgba(196, 30, 58, 0.5)' }}
+          className="h-0.5 bg-[#C41E3A]/50"
+          style={{ boxShadow: '0 0 15px rgba(196, 30, 58, 0.4)' }}
         >
-          <div className="h-0.5 bg-primary opacity-80" />
+          <div className="h-0.5 bg-[#C41E3A] opacity-80" />
         </div>
       </div>
 
       {/* Why Choose Us Section */}
       <section ref={whyChooseRef} className="py-12 relative">
         <div
-          className="absolute inset-0 bg-gradient-radial from-primary/10 via-transparent to-transparent opacity-50"
+          className="absolute inset-0 bg-gradient-radial from-[#C41E3A]/10 via-transparent to-transparent opacity-50"
           style={{ background: 'radial-gradient(circle, rgba(196, 30, 58, 0.1) 0%, transparent 70%)' }}
         />
         <div className="container-custom max-w-5xl mx-auto relative z-10 px-4">
@@ -286,130 +436,96 @@ const TattooRemoval = () => {
             animate={isWhyChooseInView ? 'visible' : 'hidden'}
             variants={staggerChildren}
           >
+            {/* Glowing text animation */}
             <motion.h2
-              variants={textVariants}
               className="text-3xl md:text-4xl font-bold mb-8 text-center relative inline-block"
-              style={{ fontFamily: "'Dosis', sans-serif'", color: '#ffffff', textShadow: '0 0 25px rgba(196, 30, 58, 0.7)' }}
+              style={{ fontFamily: "'Dosis', sans-serif'", color: '#ffffff' }}
+              animate={{
+                textShadow: [
+                  '0 0 10px rgba(255,255,255,0.3)',
+                  '0 0 20px rgba(196, 30, 58, 0.6)',
+                  '0 0 30px rgba(196, 30, 58, 0.9)',
+                  '0 0 20px rgba(196, 30, 58, 0.6)',
+                  '0 0 10px rgba(255,255,255,0.3)'
+                ]
+              }}
+              transition={{ 
+                duration: 3, 
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
             >
-              Why <span className="text-primary">Choose Us</span>
-              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-primary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-center"></span>
+              Why <span className="text-[#C41E3A]">Choose Us</span>
+              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-[#C41E3A] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-center"></span>
             </motion.h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <motion.div
-                variants={itemVariants}
-                initial="hidden"
-                animate="visible"
-                whileHover="hover"
-                className="flex items-start space-x-4 p-6 rounded-lg border-2 border-primary/30 min-h-[150px]"
-                style={{ boxShadow: 'inset 0 0 10px rgba(196, 30, 58, 0.4)' }}
-              >
-                <FaCogs className="text-primary text-2xl mt-1" />
-                <div>
-                  <h3
-                    className="text-xl font-semibold mb-2"
-                    style={{ fontFamily: "'Dosis', sans-serif'" }}
-                  >
-                    Advanced Technology
-                  </h3>
-                  <p
-                    className="text-gray-300"
-                    style={{ fontFamily: "'Open Sans', sans-serif'" }}
-                  >
-                    We use state-of-the-art laser technology to ensure effective and precise tattoo removal.
-                  </p>
-                </div>
-              </motion.div>
-              <motion.div
-                variants={itemVariants}
-                initial="hidden"
-                animate="visible"
-                whileHover="hover"
-                className="flex items-start space-x-4 p-6 rounded-lg border-2 border-primary/30 min-h-[150px]"
-                style={{ boxShadow: 'inset 0 0 10px rgba(196, 30, 58, 0.4)' }}
-              >
-                <FaUserCheck className="text-primary text-2xl mt-1" />
-                <div>
-                  <h3
-                    className="text-xl font-semibold mb-2"
-                    style={{ fontFamily: "'Dosis', sans-serif'" }}
-                  >
-                    Certified Experts
-                  </h3>
-                  <p
-                    className="text-gray-300"
-                    style={{ fontFamily: "'Open Sans', sans-serif'" }}
-                  >
-                    Our team of certified professionals ensures safe and expert handling of every procedure.
-                  </p>
-                </div>
-              </motion.div>
-              <motion.div
-                variants={itemVariants}
-                initial="hidden"
-                animate="visible"
-                whileHover="hover"
-                className="flex items-start space-x-4 p-6 rounded-lg border-2 border-primary/30 min-h-[150px]"
-                style={{ boxShadow: 'inset 0 0 10px rgba(196, 30, 58, 0.4)' }}
-              >
-                <FaShieldAlt className="text-primary text-2xl mt-1" />
-                <div>
-                  <h3
-                    className="text-xl font-semibold mb-2"
-                    style={{ fontFamily: "'Dosis', sans-serif'" }}
-                  >
-                    Customized Solutions
-                  </h3>
-                  <p
-                    className="text-gray-300"
-                    style={{ fontFamily: "'Open Sans', sans-serif'" }}
-                  >
-                    Every tattoo is unique, and so is our approach. We create personalized plans tailored to your tattoo’s size, color, and depth.
-                  </p>
-                </div>
-              </motion.div>
-              <motion.div
-                variants={itemVariants}
-                initial="hidden"
-                animate="visible"
-                whileHover="hover"
-                className="flex items-start space-x-4 p-6 rounded-lg border-2 border-primary/30 min-h-[150px]"
-                style={{ boxShadow: 'inset 0 0 10px rgba(196, 30, 58, 0.4)' }}
-              >
-                <FaSyringe className="text-primary text-2xl mt-1" />
-                <div>
-                  <h3
-                    className="text-xl font-semibold mb-2"
-                    style={{ fontFamily: "'Dosis', sans-serif'" }}
-                  >
-                    Hygienic Practices
-                  </h3>
-                  <p
-                    className="text-gray-300"
-                    style={{ fontFamily: "'Open Sans', sans-serif'" }}
-                  >
-                    Our studio adheres to the highest standards of hygiene to ensure your safety and comfort.
-                  </p>
-                </div>
-              </motion.div>
+              {[
+                {
+                  icon: <FaCogs className="text-[#C41E3A] text-2xl mt-1" />,
+                  title: "Advanced Technology",
+                  content: "We use state-of-the-art laser technology to ensure effective and precise tattoo removal."
+                },
+                {
+                  icon: <FaUserCheck className="text-[#C41E3A] text-2xl mt-1" />,
+                  title: "Certified Experts",
+                  content: "Our team of certified professionals ensures safe and expert handling of every procedure."
+                },
+                {
+                  icon: <FaShieldAlt className="text-[#C41E3A] text-2xl mt-1" />,
+                  title: "Customized Solutions",
+                  content: "Every tattoo is unique, and so is our approach. We create personalized plans tailored to your tattoo’s size, color, and depth."
+                },
+                {
+                  icon: <FaSyringe className="text-[#C41E3A] text-2xl mt-1" />,
+                  title: "Hygienic Practices",
+                  content: "Our studio adheres to the highest standards of hygiene to ensure your safety and comfort."
+                }
+              ].map((item, index) => (
+                <motion.div
+                  key={index}
+                  variants={itemVariants}
+                  initial="hidden"
+                  animate="visible"
+                  whileHover="hover"
+                  className="flex items-start space-x-4 p-6 rounded-lg border-2 border-[#C41E3A]/30 min-h-[150px]"
+                  style={{ boxShadow: 'inset 0 0 10px rgba(196, 30, 58, 0.3)' }}
+                >
+                  {item.icon}
+                  <div>
+                    <h3
+                      className="text-xl font-semibold mb-2"
+                      style={{ fontFamily: "'Dosis', sans-serif'" }}
+                    >
+                      {item.title}
+                    </h3>
+                    <p
+                      className="text-gray-300"
+                      style={{ fontFamily: "'Open Sans', sans-serif'" }}
+                    >
+                      {item.content}
+                    </p>
+                  </div>
+                </motion.div>
+              ))}
             </div>
           </motion.div>
         </div>
       </section>
 
-      {/* Neon Divider */}
+      {/* Neon Divider - COLOR CHANGED TO RED */}
       <div className="relative max-w-5xl mx-auto px-4">
         <div
-          className="h-0.5 bg-primary/50"
-          style={{ boxShadow: '0 0 15px rgba(196, 30, 58, 0.5)' }}
+          className="h-0.5 bg-[#C41E3A]/50"
+          style={{ boxShadow: '0 0 15px rgba(196, 30, 58, 0.4)' }}
         >
-          <div className="h-0.5 bg-primary opacity-80" />
+          <div className="h-0.5 bg-[#C41E3A] opacity-80" />
         </div>
       </div>
 
       {/* Portfolio Section */}
       <section ref={portfolioRef} className="py-12 relative">
         <div
-          className="absolute inset-0 bg-gradient-radial from-primary/10 via-transparent to-transparent opacity-50"
+          className="absolute inset-0 bg-gradient-radial from-[#C41E3A]/10 via-transparent to-transparent opacity-50"
           style={{ background: 'radial-gradient(circle, rgba(196, 30, 58, 0.1) 0%, transparent 70%)' }}
         />
         <div className="container-custom max-w-5xl mx-auto relative z-10 px-4">
@@ -418,76 +534,76 @@ const TattooRemoval = () => {
             animate={isPortfolioInView ? 'visible' : 'hidden'}
             variants={staggerChildren}
           >
+            {/* Glowing text animation */}
             <motion.h2
-              variants={textVariants}
               className="text-3xl md:text-4xl font-bold mb-8 text-center relative inline-block"
-              style={{ fontFamily: "'Dosis', sans-serif'", color: '#ffffff', textShadow: '0 0 25px rgba(196, 30, 58, 0.7)' }}
+              style={{ fontFamily: "'Dosis', sans-serif'", color: '#ffffff' }}
+              animate={{
+                textShadow: [
+                  '0 0 10px rgba(255,255,255,0.3)',
+                  '0 0 20px rgba(196, 30, 58, 0.6)',
+                  '0 0 30px rgba(196, 30, 58, 0.9)',
+                  '0 0 20px rgba(196, 30, 58, 0.6)',
+                  '0 0 10px rgba(255,255,255,0.3)'
+                ]
+              }}
+              transition={{ 
+                duration: 3, 
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
             >
-              Our <span className="text-primary">Portfolio</span>
-              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-primary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-center"></span>
+              Our <span className="text-[#C41E3A]">Portfolio</span>
+              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-[#C41E3A] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-center"></span>
             </motion.h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <motion.div
-                variants={itemVariants}
-                initial="hidden"
-                animate="visible"
-                whileHover="hover"
-                className="rounded-lg overflow-hidden border-2 border-primary/30"
-                style={{ boxShadow: 'inset 0 0 15px rgba(196, 30, 58, 0.5), 0 0 20px rgba(196, 30, 58, 0.6)' }}
-              >
-                <img
-                  src="https://ahmedabadinktattoo.com/wp-content/uploads/2024/12/1000025658-1152x1536.jpeg"
-                  alt="Tattoo Removal Portfolio 1"
-                  className="w-full h-64 object-cover"
-                />
-              </motion.div>
-              <motion.div
-                variants={itemVariants}
-                initial="hidden"
-                animate="visible"
-                whileHover="hover"
-                className="rounded-lg overflow-hidden border-2 border-primary/30"
-                style={{ boxShadow: 'inset 0 0 15px rgba(196, 30, 58, 0.5), 0 0 20px rgba(196, 30, 58, 0.6)' }}
-              >
-                <img
-                  src="https://ahmedabadinktattoo.com/wp-content/uploads/2024/12/7A1F815B-5BCF-4FF7-B535-2F8BC6B186C5-1536x1536.jpg"
-                  alt="Tattoo Removal Portfolio 2"
-                  className="w-full h-64 object-cover"
-                />
-              </motion.div>
-              <motion.div
-                variants={itemVariants}
-                initial="hidden"
-                animate="visible"
-                whileHover="hover"
-                className="rounded-lg overflow-hidden border-2 border-primary/30"
-                style={{ boxShadow: 'inset 0 0 15px rgba(196, 30, 58, 0.5), 0 0 20px rgba(196, 30, 58, 0.6)' }}
-              >
-                <img
-                  src="https://ahmedabadinktattoo.com/wp-content/uploads/2024/12/1000000413-1152x1536.jpeg"
-                  alt="Tattoo Removal Portfolio 3"
-                  className="w-full h-64 object-cover"
-                />
-              </motion.div>
+              {[
+                "https://ahmedabadinktattoo.com/wp-content/uploads/2024/12/1000025658-1152x1536.jpeg",
+                "https://ahmedabadinktattoo.com/wp-content/uploads/2024/12/7A1F815B-5BCF-4FF7-B535-2F8BC6B186C5-1536x1536.jpg",
+                "https://ahmedabadinktattoo.com/wp-content/uploads/2024/12/1000000413-1152x1536.jpeg"
+              ].map((src, index) => (
+                <motion.div
+                  key={index}
+                  variants={itemVariants}
+                  initial="hidden"
+                  animate="visible"
+                  whileHover="hover"
+                  className="rounded-lg overflow-hidden border-2 border-[#C41E3A]/30"
+                  style={{ boxShadow: 'inset 0 0 15px rgba(196, 30, 58, 0.4), 0 0 20px rgba(196, 30, 58, 0.5)' }}
+                >
+                  {/* Image reveal animation */}
+                  <motion.div
+                    initial={{ scale: 1.1, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ delay: 0.3 + index * 0.1, duration: 0.8 }}
+                  >
+                    <img
+                      src={src}
+                      alt={`Tattoo Removal Portfolio ${index + 1}`}
+                      className="w-full h-64 object-cover"
+                    />
+                  </motion.div>
+                </motion.div>
+              ))}
             </div>
           </motion.div>
         </div>
       </section>
 
-      {/* Neon Divider */}
+      {/* Neon Divider - COLOR CHANGED TO RED */}
       <div className="relative max-w-5xl mx-auto px-4">
         <div
-          className="h-0.5 bg-primary/50"
-          style={{ boxShadow: '0 0 15px rgba(196, 30, 58, 0.5)' }}
+          className="h-0.5 bg-[#C41E3A]/50"
+          style={{ boxShadow: '0 0 15px rgba(196, 30, 58, 0.4)' }}
         >
-          <div className="h-0.5 bg-primary opacity-80" />
+          <div className="h-0.5 bg-[#C41E3A] opacity-80" />
         </div>
       </div>
 
       {/* Call to Action Section */}
       <section ref={ctaRef} className="py-12 relative">
         <div
-          className="absolute inset-0 bg-gradient-radial from-primary/10 via-transparent to-transparent opacity-50"
+          className="absolute inset-0 bg-gradient-radial from-[#C41E3A]/10 via-transparent to-transparent opacity-50"
           style={{ background: 'radial-gradient(circle, rgba(196, 30, 58, 0.1) 0%, transparent 70%)' }}
         />
         <div className="container-custom max-w-5xl mx-auto relative z-10 px-4">
@@ -497,30 +613,96 @@ const TattooRemoval = () => {
             variants={staggerChildren}
             className="text-center"
           >
+            {/* Glowing text animation */}
             <motion.h2
-              variants={textVariants}
               className="text-3xl md:text-4xl font-bold mb-4 relative inline-block"
-              style={{ fontFamily: "'Dosis', sans-serif'", color: '#ffffff', textShadow: '0 0 25px rgba(196, 30, 58, 0.7)' }}
+              style={{ fontFamily: "'Dosis', sans-serif'", color: '#ffffff' }}
+              animate={{
+                textShadow: [
+                  '0 0 10px rgba(255,255,255,0.3)',
+                  '0 0 20px rgba(196, 30, 58, 0.6)',
+                  '0 0 30px rgba(196, 30, 58, 0.9)',
+                  '0 0 20px rgba(196, 30, 58, 0.6)',
+                  '0 0 10px rgba(255,255,255,0.3)'
+                ]
+              }}
+              transition={{ 
+                duration: 3, 
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
             >
-              Ready to Start <span className="text-primary">Fresh?</span>
-              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-primary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-center"></span>
+              Ready to Start <span className="text-[#C41E3A]">Fresh?</span>
+              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-[#C41E3A] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-center"></span>
             </motion.h2>
+            
+            {/* Text pulse animation */}
             <motion.p
-              variants={textVariants}
               className="text-lg text-gray-300 mb-6"
               style={{ fontFamily: "'Open Sans', sans-serif'" }}
+              animate={{ 
+                textShadow: [
+                  '0 0 5px rgba(255,255,255,0.1)',
+                  '0 0 15px rgba(196, 30, 58, 0.3)',
+                  '0 0 5px rgba(255,255,255,0.1)'
+                ]
+              }}
+              transition={{ 
+                duration: 3, 
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
             >
               Book a free consultation with our experts and take the first step toward removing or lightening your tattoo.
             </motion.p>
+            
+            {/* Button with particle effect on hover */}
             <motion.div variants={textVariants}>
               <Link
                 to="/contact"
-                className="inline-block bg-primary text-white py-3 px-8 rounded-lg font-medium border-2 border-primary/60 hover:bg-transparent hover:text-primary transition-all duration-500"
+                className="relative overflow-hidden inline-block bg-[#C41E3A] text-black py-3 px-8 rounded-lg font-medium border-2 border-[#C41E3A]/60 transition-all duration-500"
                 style={{ fontFamily: "'Open Sans', sans-serif'" }}
-                whileHover={{ scale: 1.05, boxShadow: '0 0 40px rgba(196, 30, 58, 0.8)' }}
+                whileHover={{ 
+                  scale: 1.05, 
+                  boxShadow: '0 0 40px rgba(196, 30, 58, 0.8)',
+                  backgroundColor: 'black',
+                  color: '#C41E3A'
+                }}
                 whileTap={{ scale: 0.95 }}
               >
                 Book a Consultation
+                
+                {/* Button glow particles */}
+                <motion.div
+                  className="absolute inset-0 pointer-events-none"
+                  initial={false}
+                  whileHover={{
+                    opacity: [0, 1],
+                    transition: { duration: 0.3 }
+                  }}
+                >
+                  {[...Array(5)].map((_, i) => (
+                    <motion.div
+                      key={i}
+                      className="absolute w-2 h-2 rounded-full bg-[#C41E3A]"
+                      style={{
+                        left: `${Math.random() * 100}%`,
+                        top: `${Math.random() * 100}%`,
+                      }}
+                      animate={{
+                        x: [0, (Math.random() - 0.5) * 100],
+                        y: [0, (Math.random() - 0.5) * 100],
+                        scale: [1, 1.5, 0],
+                        opacity: [0.8, 0]
+                      }}
+                      transition={{
+                        duration: 1,
+                        delay: i * 0.1,
+                        ease: "easeOut"
+                      }}
+                    />
+                  ))}
+                </motion.div>
               </Link>
             </motion.div>
           </motion.div>
