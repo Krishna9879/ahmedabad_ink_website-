@@ -1,7 +1,9 @@
-
 import { useRef } from 'react';
 import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 import { FaArrowRight } from 'react-icons/fa';
+import AiK1 from '../assets/hero_bg.png';
+import AiK2 from '../assets/about_img1.png';
+import IMG_8298 from '../assets/about_img2.png';
 
 // FuturisticImage component with unique hover effects for different sections
 const FuturisticImage = ({ src, alt, className = "", section }) => {
@@ -13,7 +15,7 @@ const FuturisticImage = ({ src, alt, className = "", section }) => {
           className="absolute inset-0 bg-gradient-to-br from-primary/30 via-cyan-500/20 to-purple-500/30 opacity-0 group-hover:opacity-100"
           animate={{
             opacity: [0, 0.8, 0],
-            scale: [1, 1.1, 1],
+            scale: [1, 1.05, 1], // Reduced scale effect
             transition: { duration: 1.5, repeat: Infinity, ease: 'easeInOut' }
           }}
         />
@@ -29,7 +31,7 @@ const FuturisticImage = ({ src, alt, className = "", section }) => {
                 top: `${Math.random() * 100}%`,
               }}
               animate={{
-                scale: [0, 1.5, 0],
+                scale: [0, 1.2, 0], // Reduced scale effect
                 opacity: [0, 1, 0],
                 transition: {
                   duration: 2,
@@ -48,7 +50,7 @@ const FuturisticImage = ({ src, alt, className = "", section }) => {
         <motion.div
           className="absolute inset-0 bg-gradient-radial from-primary/40 via-transparent to-transparent opacity-0 group-hover:opacity-100"
           animate={{
-            scale: [1, 1.2, 1],
+            scale: [1, 1.1, 1], // Reduced scale effect
             opacity: [0, 0.7, 0],
             transition: { duration: 2, repeat: Infinity, ease: 'easeInOut' }
           }}
@@ -65,7 +67,7 @@ const FuturisticImage = ({ src, alt, className = "", section }) => {
                 top: `${Math.random() * 100}%`,
               }}
               animate={{
-                scale: [0, 1.3, 0],
+                scale: [0, 1.1, 0], // Reduced scale effect
                 opacity: [0, 0.8, 0],
                 transition: {
                   duration: 1.8,
@@ -100,7 +102,7 @@ const FuturisticImage = ({ src, alt, className = "", section }) => {
                 top: `${Math.random() * 100}%`,
               }}
               animate={{
-                scale: [0, 1.4, 0],
+                scale: [0, 1.2, 0], // Reduced scale effect
                 opacity: [0, 1, 0],
                 transition: {
                   duration: 2.2,
@@ -120,7 +122,7 @@ const FuturisticImage = ({ src, alt, className = "", section }) => {
           className="absolute inset-0 bg-gradient-to-r from-cyan-500/30 to-primary/30 opacity-0 group-hover:opacity-100"
           animate={{
             opacity: [0, 0.85, 0],
-            scale: [1, 1.15, 1],
+            scale: [1, 1.1, 1], // Reduced scale effect
             transition: { duration: 2.5, repeat: Infinity, ease: 'easeInOut' }
           }}
         />
@@ -136,7 +138,7 @@ const FuturisticImage = ({ src, alt, className = "", section }) => {
                 top: `${Math.random() * 100}%`,
               }}
               animate={{
-                scale: [0, 1.6, 0],
+                scale: [0, 1.3, 0], // Reduced scale effect
                 opacity: [0, 0.9, 0],
                 transition: {
                   duration: 2,
@@ -156,7 +158,7 @@ const FuturisticImage = ({ src, alt, className = "", section }) => {
           className="absolute inset-0 bg-gradient-to-br from-primary/25 via-purple-500/20 to-cyan-500/25 opacity-0 group-hover:opacity-100"
           animate={{
             opacity: [0, 0.75, 0],
-            scale: [1, 1.1, 1],
+            scale: [1, 1.05, 1], // Reduced scale effect
             transition: { duration: 2.3, repeat: Infinity, ease: 'easeInOut' }
           }}
         />
@@ -172,7 +174,7 @@ const FuturisticImage = ({ src, alt, className = "", section }) => {
                 top: `${Math.random() * 100}%`,
               }}
               animate={{
-                scale: [0, 1.5, 0],
+                scale: [0, 1.3, 0], // Reduced scale effect
                 opacity: [0, 0.85, 0],
                 transition: {
                   duration: 2.5,
@@ -200,7 +202,7 @@ const FuturisticImage = ({ src, alt, className = "", section }) => {
           transition: { duration: 0.8, ease: 'easeOut' }
         },
         hover: {
-          scale: 1.05,
+          scale: 1.03, // Reduced hover scale effect
           transition: { duration: 0.4, ease: 'easeOut' }
         }
       }}
@@ -212,7 +214,7 @@ const FuturisticImage = ({ src, alt, className = "", section }) => {
       <img
         src={src}
         alt={alt}
-        className="w-full h-full object-cover transition-all duration-700 group-hover:brightness-110"
+        className="w-full h-full object-cover transition-all duration-700 group-hover:brightness-105 scale-100" // Added zoom-out effect
       />
       {currentEffect.overlay}
       {currentEffect.particles}
@@ -405,14 +407,14 @@ const AboutUs = () => {
                 Our <span className="text-primary">Legacy</span>
               </h2>
               <p className="text-lg text-gray-300 mb-4 font-openSans">
-                Ahmedabad Ink Tattoo has been a cornerstone of artistic expression in Ahmedabad for over a decade. Our studio is more than just a place to get inked—it’s a creative haven where your ideas come to life through the hands of our skilled artists. Specializing in custom tattoos, piercings, and tattoo removal, we pride ourselves on delivering exceptional quality and a personalized experience.
+                Ahmedabad Ink Tattoo has been a cornerstone of artistic expression in Ahmedabad for over a decade. Our studio is more than just a place to get inked—it's a creative haven where your ideas come to life through the hands of our skilled artists. Specializing in custom tattoos, piercings, and tattoo removal, we pride ourselves on delivering exceptional quality and a personalized experience.
               </p>
               <p className="text-lg text-gray-300 mb-4 font-openSans">
-                We’re redefining tattoo artistry with cutting-edge technology, ensuring every piece is a masterpiece that stands the test of time.
+                We're redefining tattoo artistry with cutting-edge technology, ensuring every piece is a masterpiece that stands the test of time.
               </p>
             </motion.div>
             <FuturisticImage
-              src="https://ahmedabadinktattoo.com/wp-content/uploads/2024/12/AiK-2-768x1367.jpg"
+              src={AiK1}
               alt="Studio interior"
               className="rounded-xl border-2 border-primary/40 h-96"
               section="intro"
@@ -422,18 +424,18 @@ const AboutUs = () => {
             variants={staggerChildren}
             className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8"
           >
-            {[
-              'https://ahmedabadinktattoo.com/wp-content/uploads/2024/12/IMG_8298-2048x1952.jpg',
-              'https://ahmedabadinktattoo.com/wp-content/uploads/2024/12/ramgarhia-tattoos-studio-chhabewal-hoshiarpur-tattoo-artists-j66c8ikzwr-1536x1152.avif',
-            ].map((src, index) => (
-              <FuturisticImage
-                key={index}
-                src={src}
-                alt={`Intro Image ${index + 1}`}
-                className="rounded-xl border-2 border-primary/40 h-64"
-                section="intro"
-              />
-            ))}
+            <FuturisticImage
+              src={AiK2}
+              alt="Intro Image 1"
+              className="rounded-xl border-2 border-primary/40 h-96" // Changed to h-96 for consistent height
+              section="intro"
+            />
+            <FuturisticImage
+              src={IMG_8298}
+              alt="Intro Image 2"
+              className="rounded-xl border-2 border-primary/40 h-96" // Changed to h-96 for consistent height
+              section="intro"
+            />
           </motion.div>
         </div>
       </section>
@@ -507,7 +509,7 @@ const AboutUs = () => {
               variants={textVariants}
               className="text-xl text-gray-300 max-w-4xl mx-auto font-openSans"
             >
-              We’re committed to maintaining the highest standards of hygiene and safety, ensuring that every visit to our studio is as comfortable as it is memorable. Experience the future with our innovative tattoo technology.
+              We're committed to maintaining the highest standards of hygiene and safety, ensuring that every visit to our studio is as comfortable as it is memorable. Experience the future with our innovative tattoo technology.
             </motion.p>
           </motion.div>
           <motion.div
@@ -536,7 +538,7 @@ const AboutUs = () => {
                 variants={{
                   hidden: { opacity: 0, scale: 0.9 },
                   visible: { opacity: 1, scale: 1, transition: { duration: 0.8, ease: 'easeOut' } },
-                  hover: { scale: 1.05, transition: { duration: 0.4, ease: 'easeOut' } }
+                  hover: { scale: 1.03, transition: { duration: 0.4, ease: 'easeOut' } } // Reduced hover scale
                 }}
                 initial="hidden"
                 animate="visible"
@@ -584,7 +586,7 @@ const AboutUs = () => {
               variants={textVariants}
               className="text-xl text-gray-300 max-w-4xl mx-auto font-openSans"
             >
-              A timeline of Ahmedabad Ink Tattoo’s evolution into the future of tattoo artistry.
+              A timeline of Ahmedabad Ink Tattoo's evolution into the future of tattoo artistry.
             </motion.p>
           </motion.div>
           <div className="relative">
@@ -742,7 +744,7 @@ const AboutUs = () => {
               variants={textVariants}
               className="text-xl text-gray-300 mb-8 font-openSans"
             >
-              Join us at Ahmedabad Ink Tattoo and let’s create a masterpiece that defines the future of tattooing.
+              Join us at Ahmedabad Ink Tattoo and let's create a masterpiece that defines the future of tattooing.
             </motion.p>
             <motion.a
               href="#contact"

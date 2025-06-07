@@ -8,6 +8,12 @@ import img3 from '../assets/demo2.webp';
 import img4 from '../assets/cloudimage4.jpeg';
 import img5 from '../assets/insta_image5.jpg';
 import img6 from '../assets/insta_image2.jpg';
+import img7 from '../assets/cloudimage5.webp';
+import img8 from '../assets/cloudimage6.webp';
+import img9 from '../assets/cloudimage7.webp';
+import img10 from '../assets/cloudimage8.webp';
+import img11 from '../assets/cloudimage9.webp';
+import img12 from '../assets/cloudimage10.webp';
 
 const Portfolio = () => {
   const sectionRefs = {
@@ -355,6 +361,12 @@ const Portfolio = () => {
                 img4,
                 img5,
                 img6,
+                img7,
+                img8,
+                img9,
+                img10,
+                img11,
+                img12,
                 "https://ahmedabadinktattoo.com/wp-content/uploads/2024/12/IMG20180604080023-1152x1536.jpg",
                 "https://ahmedabadinktattoo.com/wp-content/uploads/2024/12/1000026027-1152x1536.jpeg",
                 "https://ahmedabadinktattoo.com/wp-content/uploads/2024/12/1000025709-1152x1536.jpeg",

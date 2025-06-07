@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { gsap } from 'gsap';
+import heroBg from '../../assets/hero_bg.png'; // Importing the background image from assets folder
 
 const HeroSection = () => {
   const needleRef = useRef(null);
@@ -57,7 +58,7 @@ const HeroSection = () => {
       {/* Background with comprehensive overlay */}
       <div className="absolute inset-0 z-0">
         {/* Background image */}
-        <div className="absolute inset-0 bg-hero-pattern bg-cover bg-center bg-no-repeat bg-fixed transform scale-110"></div>
+        <div className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed transform scale-110" style={{ backgroundImage: `url(${heroBg})` }}></div>
 
         {/* Primary gradient overlay - covers entire section */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/95 via-black/80 to-black/90"></div>
