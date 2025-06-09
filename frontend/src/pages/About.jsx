@@ -650,22 +650,23 @@ const AboutUs = () => {
               className="text-4xl md:text-6xl font-dosis font-bold mb-6"
               style={{ textShadow: '0 0 20px rgba(196, 30, 58, 0.6)' }}
             >
-              Holographic <span className="text-primary">Experience</span>
+              Personalized Tattoo<span className="text-primary"> Consultation </span>
             </motion.h2>
             <motion.p
               variants={textVariants}
               className="text-xl text-gray-300 max-w-4xl mx-auto font-openSans"
             >
-              Step into our studio and experience your tattoo design in a holographic preview, blending art with futuristic technology.
+              Step into our studio and collaborate with expert artists who take the time to understand your vision. From rough sketches to final design, we ensure every tattoo is tailored to your personality and style.
             </motion.p>
           </motion.div>
           <div className="relative max-w-3xl mx-auto">
             <FuturisticImage
-              src="https://ahmedabadinktattoo.com/wp-content/uploads/2024/12/ramgarhia-tattoos-studio-chhabewal-hoshiarpur-tattoo-artists-j66c8ikzwr-1536x1152.avif"
-              alt="Holographic Preview"
-              className="rounded-xl border-4 border-primary/50 h-96"
-              section="hologram"
-            />
+                src={IMG_8298}
+                 alt="Holographic Preview"
+                  className="rounded-xl border-4 border-primary/50 h-96"
+                  section="hologram"
+                 />
+
             <motion.div
               className="absolute inset-0 border-2 border-primary/30 m-2 rounded-lg pointer-events-none"
               variants={glowVariants}

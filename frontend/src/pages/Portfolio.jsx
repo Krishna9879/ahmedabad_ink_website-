@@ -575,73 +575,244 @@ const Portfolio = () => {
       </div>
 
       {/* Featured Works Slider Section */}
-      <section ref={sectionRefs.slider} className="py-16 relative">
-        <div className="container-custom max-w-5xl mx-auto relative z-10 px-4">
-          <motion.div
-            initial="hidden"
-            animate={isInView.slider ? 'visible' : 'hidden'}
-            variants={staggerChildren}
-          >
-            <motion.h2
-              variants={textVariants}
-              animate="floating"
-              className="text-3xl md:text-4xl font-bold mb-8 text-center relative inline-block"
-              style={{ fontFamily: "'Dosis', sans-serif'", color: '#ffffff', textShadow: '0 0 25px rgba(196, 30, 58, 0.7)' }}
-            >
-              <span className="text-primary">Featured Works</span>
-              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-primary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-center"></span>
-            </motion.h2>
-            <div className="relative flex items-center justify-center">
-              <button
-                onClick={prevSlide}
-                className="absolute left-[-40px] top-1/2 transform -translate-y-1/2 bg-primary/70 text-white p-3 rounded-full hover:bg-primary transition-all"
-                aria-label="Previous Slide"
-              >
-                <FaArrowRight className="rotate-180 text-2xl" />
-              </button>
-              <div className="flex items-center space-x-4 overflow-hidden">
-                <AnimatePresence mode="wait">
-                  {[-1, 0, 1].map((offset) => {
-                    const index = (currentSlide + offset + sliderImages.length) % sliderImages.length;
-                    return (
-                      <motion.div
-                        key={index}
-                        className="flex-shrink-0"
-                        initial={{ scale: 0.9, opacity: 0.7, rotate: -5 }}
-                        animate={{
-                          scale: offset === 0 ? 1.1 : 0.9,
-                          opacity: offset === 0 ? 1 : 0.7,
-                          rotate: offset === 0 ? 3 : -5,
-                          zIndex: offset === 0 ? 10 : 5,
-                        }}
-                        transition={{ duration: 0.5 }}
-                      >
-                        <div
-                          className="w-64 h-[400px] rounded-lg border-2 border-primary/30"
-                          style={{ boxShadow: offset === 0 ? '0 0 30px rgba(196, 30, 58, 0.8), inset 0 0 15px rgba(196, 30, 58, 0.5)' : '0 0 10px rgba(196, 30, 58, 0.3)' }}
-                        >
-                          <img
-                            src={sliderImages[index]}
-                            alt={`Featured Work ${index + 1}`}
-                            className="w-full h-full object-contain rounded-lg"
-                          />
-                        </div>
-                      </motion.div>
-                    );
-                  })}
-                </AnimatePresence>
-              </div>
-              <button
-                onClick={nextSlide}
-                className="absolute right-[-40px] top-1/2 transform -translate-y-1/2 bg-primary/70 text-white p-3 rounded-full hover:bg-primary transition-all"
-                aria-label="Next Slide"
-              >
-                <FaArrowRight className="text-2xl" />
-              </button>
-            </div>
-          </motion.div>
+   {/* Featured Works Slider Section */}
+<section ref={sectionRefs.slider} className="py-20 relative overflow-hidden bg-gradient-to-b from-black via-gray-900 to-black">
+  {/* Enhanced Animated Background */}
+  <div className="absolute inset-0 pointer-events-none">
+    {/* Grid Pattern */}
+    <div className="absolute inset-0 opacity-10">
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(196,30,58,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(196,30,58,0.1)_1px,transparent_1px)] bg-[size:60px_60px]"></div>
+    </div>
+    
+    {/* Floating Particles */}
+    {[...Array(12)].map((_, i) => (
+      <motion.div
+        key={i}
+        className="absolute rounded-full"
+        style={{
+          width: `${3 + Math.random() * 4}px`,
+          height: `${3 + Math.random() * 4}px`,
+          background: `rgba(196, 30, 58, ${0.2 + Math.random() * 0.3})`,
+          left: `${Math.random() * 100}%`,
+          top: `${Math.random() * 100}%`,
+        }}
+        animate={{
+          x: [0, 30, 0],
+          y: [0, -30, 0],
+          opacity: [0.2, 0.6, 0.2],
+          scale: [0.8, 1.2, 0.8],
+        }}
+        transition={{
+          duration: 8 + Math.random() * 4,
+          repeat: Infinity,
+          delay: Math.random() * 2,
+          ease: "easeInOut"
+        }}
+      />
+    ))}
+    
+    {/* Glowing Orbs */}
+    <div className="absolute top-1/4 left-1/6 w-64 h-64 bg-primary/10 rounded-full blur-3xl animate-pulse"></div>
+    <div className="absolute bottom-1/3 right-1/6 w-48 h-48 bg-blue-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+  </div>
+  
+  <div className="container-custom max-w-7xl mx-auto relative z-10 px-4">
+    <motion.div
+      initial="hidden"
+      animate={isInView.slider ? 'visible' : 'hidden'}
+      variants={staggerChildren}
+    >
+      {/* Enhanced Header */}
+      <motion.div
+        variants={textVariants}
+        className="text-center mb-16 relative"
+      >
+        <div className="inline-flex items-center px-6 py-3 bg-primary/10 border border-primary/20 rounded-full backdrop-blur-sm mb-6">
+          <span className="w-2 h-2 bg-primary rounded-full mr-3 animate-pulse"></span>
+          <span className="text-primary text-sm font-medium uppercase tracking-wider">Our Masterpieces</span>
         </div>
-      </section>
+        
+        <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 relative">
+          <span className="bg-gradient-to-r from-white via-gray-200 to-white bg-clip-text text-transparent">
+            Featured 
+          </span>
+          <span className="block bg-gradient-to-r from-primary via-red-400 to-primary bg-clip-text text-transparent">
+            Works
+          </span>
+        </h2>
+        
+        <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+          Discover our most celebrated tattoo artworks that showcase precision, creativity, and artistic excellence
+        </p>
+        
+        {/* Decorative Lines */}
+        <div className="absolute left-1/2 transform -translate-x-1/2 -bottom-4 w-24 h-1 bg-gradient-to-r from-transparent via-primary to-transparent"></div>
+      </motion.div>
+      
+      {/* Enhanced Slider Container */}
+      <div className="relative flex items-center justify-center h-[480px] mb-12">
+        {/* Previous Button */}
+        <motion.button
+          onClick={prevSlide}
+          whileHover={{ scale: 1.1, x: -5 }}
+          whileTap={{ scale: 0.9 }}
+          className="absolute left-[-60px] top-1/2 transform -translate-y-1/2 group z-30"
+          aria-label="Previous Slide"
+        >
+          <div className="relative w-14 h-14 bg-gradient-to-br from-primary/80 to-red-600/80 rounded-full backdrop-blur-sm border border-primary/30 flex items-center justify-center shadow-2xl shadow-primary/25">
+            <FaArrowRight className="rotate-180 text-xl text-white group-hover:text-gray-200 transition-colors" />
+            <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          </div>
+        </motion.button>
+        
+        {/* Main Slider */}
+        <div className="relative w-full max-w-5xl h-full">
+          <AnimatePresence mode="wait">
+            {sliderImages.map((img, index) => (
+              <motion.div
+                key={index}
+                className={`absolute inset-0 flex items-center justify-center ${
+                  index === currentSlide ? 'z-20' : 'z-0 opacity-0 pointer-events-none'
+                }`}
+                initial={{ scale: 0.7, opacity: 0, rotateY: -45 }}
+                animate={index === currentSlide ? { 
+                  scale: 1, 
+                  opacity: 1,
+                  rotateY: 0,
+                  transition: { duration: 0.8, ease: "easeOut" } 
+                } : {}}
+                exit={{ scale: 0.7, opacity: 0, rotateY: 45 }}
+              >
+                <motion.div
+                  className="relative w-full h-full max-w-[520px] max-h-[400px] mx-auto group"
+                  whileHover={{ 
+                    scale: 1.02,
+                    transition: { duration: 0.4 }
+                  }}
+                >
+                  {/* Background Glow Effects */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/30 to-purple-600/20 rounded-3xl blur-2xl scale-110 opacity-50 group-hover:opacity-80 transition-opacity duration-500"></div>
+                  <div className="absolute inset-0 bg-gradient-to-tl from-blue-600/20 to-primary/30 rounded-3xl blur-xl scale-105 opacity-30 group-hover:opacity-60 transition-opacity duration-500"></div>
+                  
+                  {/* Main Image Container */}
+                  <div className="relative w-full h-full">
+                    {/* Geometric Frame */}
+                    <div 
+                      className="relative w-full h-full rounded-3xl overflow-hidden border-2 border-primary/40 group-hover:border-primary/60 transition-colors duration-500"
+                      style={{ 
+                        background: 'linear-gradient(145deg, rgba(0,0,0,0.3), rgba(196,30,58,0.1))',
+                        boxShadow: `
+                          0 0 60px rgba(196, 30, 58, 0.4),
+                          inset 0 0 30px rgba(196, 30, 58, 0.2),
+                          0 25px 50px rgba(0, 0, 0, 0.5)
+                        `
+                      }}
+                    >
+                      {/* Image */}
+                      <img
+                        src={img}
+                        alt={`Featured Work ${index + 1}`}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
+                      
+                      {/* Overlay Gradient */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-500"></div>
+                      
+                      {/* Corner Accents */}
+                      <div className="absolute top-4 left-4 w-8 h-8 border-l-2 border-t-2 border-primary/60"></div>
+                      <div className="absolute top-4 right-4 w-8 h-8 border-r-2 border-t-2 border-primary/60"></div>
+                      <div className="absolute bottom-4 left-4 w-8 h-8 border-l-2 border-b-2 border-primary/60"></div>
+                      <div className="absolute bottom-4 right-4 w-8 h-8 border-r-2 border-b-2 border-primary/60"></div>
+                    </div>
+                    
+                    {/* Enhanced Title Card */}
+                    <motion.div 
+                      className="absolute -bottom-8 left-0 right-0 flex justify-center"
+                      initial={{ y: 20, opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      transition={{ delay: 0.3 }}
+                    >
+                      <div className="bg-gradient-to-r from-black/90 via-gray-900/90 to-black/90 backdrop-blur-md px-8 py-4 rounded-2xl border border-primary/30 shadow-2xl">
+                        <h3 className="text-xl font-bold text-white">
+                          <span className="bg-gradient-to-r from-primary to-red-400 bg-clip-text text-transparent">
+                            Masterpiece {index + 1}
+                          </span>
+                        </h3>
+                        <div className="w-full h-0.5 bg-gradient-to-r from-transparent via-primary to-transparent mt-2"></div>
+                      </div>
+                    </motion.div>
+                  </div>
+                </motion.div>
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </div>
+        
+        {/* Next Button */}
+        <motion.button
+          onClick={nextSlide}
+          whileHover={{ scale: 1.1, x: 5 }}
+          whileTap={{ scale: 0.9 }}
+          className="absolute right-[-60px] top-1/2 transform -translate-y-1/2 group z-30"
+          aria-label="Next Slide"
+        >
+          <div className="relative w-14 h-14 bg-gradient-to-br from-primary/80 to-red-600/80 rounded-full backdrop-blur-sm border border-primary/30 flex items-center justify-center shadow-2xl shadow-primary/25">
+            <FaArrowRight className="text-xl text-white group-hover:text-gray-200 transition-colors" />
+            <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          </div>
+        </motion.button>
+      </div>
+      
+      {/* Enhanced Pagination Dots */}
+      <motion.div 
+        className="flex justify-center items-center space-x-4"
+        variants={textVariants}
+      >
+        {sliderImages.map((_, index) => (
+          <motion.button
+            key={index}
+            onClick={() => setCurrentSlide(index)}
+            whileHover={{ scale: 1.2 }}
+            whileTap={{ scale: 0.9 }}
+            className={`relative transition-all duration-300 ${
+              index === currentSlide 
+                ? 'w-12 h-4' 
+                : 'w-4 h-4'
+            }`}
+            aria-label={`Go to slide ${index + 1}`}
+          >
+            <div className={`w-full h-full rounded-full transition-all duration-300 ${
+              index === currentSlide 
+                ? 'bg-gradient-to-r from-primary to-red-400 shadow-lg shadow-primary/40' 
+                : 'bg-gray-600 hover:bg-primary/60'
+            }`}></div>
+            
+            {index === currentSlide && (
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-primary to-red-400 rounded-full blur-sm opacity-60"
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ duration: 0.3 }}
+              />
+            )}
+          </motion.button>
+        ))}
+      </motion.div>
+      
+      {/* Progress Bar */}
+      <div className="flex justify-center mt-8">
+        <div className="w-64 h-1 bg-gray-800 rounded-full overflow-hidden">
+          <motion.div
+            className="h-full bg-gradient-to-r from-primary to-red-400"
+            initial={{ width: 0 }}
+            animate={{ width: `${((currentSlide + 1) / sliderImages.length) * 100}%` }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+          />
+        </div>
+      </div>
+    </motion.div>
+  </div>
+</section>
 
       {/* Neon Divider */}
       <div className="relative max-w-5xl mx-auto px-4">
