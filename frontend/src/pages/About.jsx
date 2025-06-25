@@ -218,8 +218,7 @@ const FuturisticImage = ({ src, alt, className = "", section }) => {
       />
       {currentEffect.overlay}
       {currentEffect.particles}
-      <div className="absolute inset-0 border-2 border-transparent group-hover:border-primary/60 transition-all duration-500">
-        <div className="absolute inset-0 border-2 border-transparent group-hover:border-cyan-400/40 transition-all duration-700 delay-100" />
+      <div className="absolute inset-0 border border-primary/60 transition-all duration-500">
       </div>
       <div className="absolute top-2 left-2 w-4 h-4 border-l-2 border-t-2 border-primary/0 group-hover:border-primary transition-all duration-500" />
       <div className="absolute top-2 right-2 w-4 h-4 border-r-2 border-t-2 border-primary/0 group-hover:border-primary transition-all duration-500" />
@@ -355,7 +354,7 @@ const AboutUs = () => {
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/60 to-black/90" />
         <motion.div
-          className="absolute inset-0 border-8 border-primary/30 m-6 rounded-2xl"
+          className="absolute inset-0 border-8 border-white/30 m-6 rounded-2xl"
           variants={glowVariants}
           initial="hidden"
           animate="visible"
@@ -368,8 +367,8 @@ const AboutUs = () => {
         >
           <motion.h1
             className="text-5xl md:text-9xl font-dosis font-bold mb-8 tracking-widest"
-            style={{ textShadow: '0 0 30px rgba(196, 30, 58, 0.7)' }}
-            animate={{ color: ['#ffffff', '#C41E3A', '#ffffff'], transition: { duration: 3, repeat: Infinity } }}
+            style={{ textShadow: '0 0 30px rgba(255, 255, 255, 0.7)' }}
+            animate={{ color: ['#ffffff', '#ffffff', '#ffffff'], transition: { duration: 3, repeat: Infinity } }}
           >
             Welcome To <span className="text-primary">AHMEDABAD INK TATTOO</span>
           </motion.h1>
@@ -379,10 +378,10 @@ const AboutUs = () => {
             Pioneering the Future of Tattoo Artistry Since 2015
           </motion.p>
           <motion.a
-            href="#contact"
-            whileHover={{ scale: 1.2, boxShadow: '0 0 40px rgba(196, 30, 58, 0.9)' }}
+            href="/contactpage"
+            whileHover={{ scale: 1.2, boxShadow: '0 0 40px rgba(255, 255, 255, 0.9)' }}
             whileTap={{ scale: 0.95 }}
-            className="inline-flex items-center bg-primary text-white py-4 px-10 rounded-xl font-medium border-2 border-primary/70 hover:bg-transparent hover:text-primary transition-all duration-500 font-openSans"
+            className="inline-flex items-center bg-primary text-white py-4 px-10 rounded-xl font-medium border-2 border-white/70 hover:bg-transparent hover:text-primary transition-all duration-500 font-openSans"
           >
             Step Into the Future
             <FaArrowRight className="ml-3" />
@@ -416,7 +415,7 @@ const AboutUs = () => {
             <FuturisticImage
               src={AiK1}
               alt="Studio interior"
-              className="rounded-xl border-2 border-primary/40 h-96"
+              className="rounded-xl border border-primary/40 h-96"
               section="intro"
             />
           </motion.div>
@@ -427,13 +426,13 @@ const AboutUs = () => {
             <FuturisticImage
               src={AiK2}
               alt="Intro Image 1"
-              className="rounded-xl border-2 border-primary/40 h-96" // Changed to h-96 for consistent height
+              className="rounded-xl border border-primary/40 h-96"
               section="intro"
             />
             <FuturisticImage
               src={IMG_8298}
               alt="Intro Image 2"
-              className="rounded-xl border-2 border-primary/40 h-96" // Changed to h-96 for consistent height
+              className="rounded-xl border border-primary/40 h-96"
               section="intro"
             />
           </motion.div>
@@ -476,7 +475,7 @@ const AboutUs = () => {
                 key={index}
                 src={src}
                 alt={`Creativity Image ${index + 1}`}
-                className="rounded-xl border-2 border-primary/40 h-64"
+                className="rounded-xl border border-primary/40 h-64"
                 section="creativity"
               />
             ))}
@@ -543,7 +542,7 @@ const AboutUs = () => {
                 initial="hidden"
                 animate="visible"
                 whileHover="hover"
-                className="bg-gray-900/70 p-6 rounded-xl border-2 border-primary/40 backdrop-blur-sm"
+                className="bg-gray-900/70 p-6 rounded-xl border border-primary/40 backdrop-blur-sm"
               >
                 <FuturisticImage
                   src={tech.image}
@@ -663,16 +662,9 @@ const AboutUs = () => {
             <FuturisticImage
                 src={IMG_8298}
                  alt="Holographic Preview"
-                  className="rounded-xl border-4 border-primary/50 h-96"
+                  className="rounded-xl border border-primary/50 h-96"
                   section="hologram"
                  />
-
-            <motion.div
-              className="absolute inset-0 border-2 border-primary/30 m-2 rounded-lg pointer-events-none"
-              variants={glowVariants}
-              initial="hidden"
-              animate="visible"
-            />
           </div>
         </div>
       </section>
@@ -718,7 +710,7 @@ const AboutUs = () => {
                 key={index}
                 src={img}
                 alt={`Gallery ${index + 1}`}
-                className="rounded-xl border-2 border-primary/40 h-64"
+                className="rounded-xl border border-primary/40 h-64"
                 section="gallery"
               />
             ))}
@@ -748,10 +740,10 @@ const AboutUs = () => {
               Join us at Ahmedabad Ink Tattoo and let's create a masterpiece that defines the future of tattooing.
             </motion.p>
             <motion.a
-              href="#contact"
-              whileHover={{ scale: 1.2, boxShadow: '0 0 40px rgba(196, 30, 58, 0.9)' }}
+              href="/contactpage"
+              whileHover={{ scale: 1.2, boxShadow: '0 0 40px rgba(255, 255, 255, 0.9)' }}
               whileTap={{ scale: 0.95 }}
-              className="inline-flex items-center bg-primary text-white py-4 px-10 rounded-xl font-medium border-2 border-primary/70 hover:bg-transparent hover:text-primary transition-all duration-500 font-openSans"
+              className="inline-flex items-center bg-primary text-white py-4 px-10 rounded-xl font-medium border-2 border-white/70 hover:bg-transparent hover:text-primary transition-all duration-500 font-openSans"
             >
               Book Your Session
               <FaArrowRight className="ml-3" />

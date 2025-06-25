@@ -19,6 +19,74 @@ class ErrorBoundary extends React.Component {
   }
 }
 
+// FuturisticImage component with hover effects
+const FuturisticImage = ({ src, alt, className = "" }) => {
+  return (
+    <motion.div
+      variants={{
+        hidden: { opacity: 0, scale: 0.9 },
+        visible: {
+          opacity: 1,
+          scale: 1,
+          transition: { duration: 0.8, ease: 'easeOut' }
+        },
+        hover: {
+          scale: 1.03,
+          transition: { duration: 0.4, ease: 'easeOut' }
+        }
+      }}
+      initial="hidden"
+      animate="visible"
+      whileHover="hover"
+      className={`relative group overflow-hidden ${className}`}
+    >
+      <img
+        src={src}
+        alt={alt}
+        className="w-full h-full object-cover transition-all duration-700 group-hover:brightness-105 scale-100"
+      />
+      <motion.div
+        className="absolute inset-0 bg-gradient-to-br from-primary/25 via-purple-500/20 to-cyan-500/25 opacity-0 group-hover:opacity-100"
+        animate={{
+          opacity: [0, 0.75, 0],
+          scale: [1, 1.05, 1],
+          transition: { duration: 2.3, repeat: Infinity, ease: 'easeInOut' }
+        }}
+      />
+      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+        {[...Array(10)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-2.5 h-2.5 border border-cyan-400 rounded-full"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+            }}
+            animate={{
+              scale: [0, 1.3, 0],
+              opacity: [0, 0.85, 0],
+              transition: {
+                duration: 2.5,
+                repeat: Infinity,
+                delay: Math.random() * 1.7,
+                ease: 'easeInOut'
+              }
+            }}
+          />
+        ))}
+      </div>
+      <div className="absolute inset-0 border border-primary/60 transition-all duration-500">
+      </div>
+      <div className="absolute top-2 left-2 w-4 h-4 border-l-2 border-t-2 border-primary/0 group-hover:border-primary transition-all duration-500" />
+      <div className="absolute top-2 right-2 w-4 h-4 border-r-2 border-t-2 border-primary/0 group-hover:border-primary transition-all duration-500" />
+      <div className="absolute bottom-2 left-2 w-4 h-4 border-l-2 border-b-2 border-primary/0 group-hover:border-primary transition-all duration-500" />
+      <div className="absolute bottom-2 right-2 w-4 h-4 border-r-2 border-b-2 border-primary/0 group-hover:border-primary transition-all duration-500" />
+      <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 mix-blend-overlay" />
+      <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 via-cyan-500/20 to-primary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm -z-10" />
+    </motion.div>
+  );
+};
+
 const Offers = () => {
   const sectionRefs = {
     hero: useRef(null),
@@ -51,28 +119,6 @@ const Offers = () => {
   const textVariants = {
     hidden: { opacity: 0, y: 30, scale: 0.95 },
     visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.8, ease: 'easeOut' } },
-  };
-
-  const imageVariants = {
-    hidden: { opacity: 0, scale: 0.9 },
-    visible: { opacity: 1, scale: 1, transition: { duration: 0.8, ease: 'easeOut' } },
-    hover: {
-      scale: 1.08,
-      filter: 'brightness(1.4) saturate(1.2) contrast(1.1)',
-      boxShadow: '0 0 30px rgba(239, 68, 68, 0.6), 0 0 50px rgba(239, 68, 68, 0.3)',
-      transition: { duration: 0.4, ease: [0.4, 0, 0.2, 1] },
-    },
-  };
-
-  const portfolioImageVariants = {
-    hidden: { opacity: 0, scale: 0.9 },
-    visible: { opacity: 1, scale: 1, transition: { duration: 0.8, ease: 'easeOut' } },
-    hover: {
-      scale: 1.05,
-      filter: 'brightness(1.3) saturate(1.1) contrast(1.05)',
-      boxShadow: '0 0 40px rgba(239, 68, 68, 0.7), 0 0 60px rgba(239, 68, 68, 0.4)',
-      transition: { duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] },
-    },
   };
 
   const staggerChildren = {
@@ -127,19 +173,12 @@ const Offers = () => {
         <section ref={sectionRefs.hero} className="relative pt-24 pb-16 flex items-center justify-center overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-black/90 to-gray-900/90" />
           <motion.div
-            className="absolute inset-0 border-2 border-red-500/30 m-4 rounded-xl"
-            variants={glowVariants}
-            initial="hidden"
-            animate="visible"
-            style={{ boxShadow: '0 0 20px rgba(239, 68, 68, 0.5)' }}
-          />
-          <motion.div
             initial="hidden"
             animate={isInView.hero ? 'visible' : 'hidden'}
             variants={textVariants}
             className="relative z-10 text-center px-4 max-w-4xl mx-auto"
           >
-            <h1 className="text-4xl md:text-6xl font-bold mb-4 tracking-wider font-playfair text-shadow-red">
+            <h1 className="text-4xl md:text-6xl font-bold mb-4 tracking-wider font-playfair">
               <span className="bg-gradient-to-r from-red-500 to-red-700 bg-clip-text text-transparent">Offers & Deals</span>
             </h1>
             <h2 className="text-2xl md:text-3xl font-semibold text-gray-200 mb-4 font-poppins font-medium">
@@ -165,7 +204,7 @@ const Offers = () => {
               </motion.p>
               <motion.h3
                 variants={textVariants}
-                className="text-3xl md:text-5xl font-bold mb-8 font-playfair text-shadow-red"
+                className="text-3xl md:text-5xl font-bold mb-8 font-playfair"
               >
                 Exciting Offers <span className="bg-gradient-to-r from-red-400 to-pink-500 bg-clip-text text-transparent">Coming Soon</span>
               </motion.h3>
@@ -187,48 +226,12 @@ const Offers = () => {
                 "https://ahmedabadinktattoo.com/wp-content/uploads/2024/12/2-1024x1024.jpg",
                 "https://ahmedabadinktattoo.com/wp-content/uploads/2024/12/WhatsApp-Image-2024-01-21-at-14.15.50_7aa79a12.jpg",
               ].map((img, index) => (
-                <motion.div
+                <FuturisticImage
                   key={index}
-                  variants={imageVariants}
-                  initial="hidden"
-                  animate="visible"
-                  whileHover="hover"
-                  className="relative rounded-2xl overflow-hidden border border-red-500/20 cursor-pointer group bg-gradient-to-br from-red-500/5 to-black/40 backdrop-blur-md"
-                >
-                  <div
-                    className="absolute inset-0 rounded-2xl border-2 border-transparent bg-gradient-to-r from-red-500/0 via-red-500/50 to-red-500/0 opacity-0 group-hover:opacity-100 transition-all duration-700 animate-pulse"
-                    style={{ animation: 'shimmer 2s infinite' }}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-br from-red-500/10 via-transparent to-red-700/10 opacity-0 group-hover:opacity-100 transition-all duration-500 z-10" />
-                  <div
-                    className="absolute inset-0 opacity-0 group-hover:opacity-30 transition-all duration-500"
-                    style={{
-                      backgroundImage: 'repeating-linear-gradient(45deg, transparent, transparent 4px, rgba(239, 68, 68, 0.1) 4px, rgba(239, 68, 68, 0.1) 8px)',
-                      animation: 'scan 3s linear infinite',
-                    }}
-                  />
-                  {!imagesLoaded && (
-                    <div className="absolute inset-0 flex items-center justify-center bg-gray-900/50">
-                      <span className="text-gray-300">Loading...</span>
-                    </div>
-                  )}
-                  <img
-                    src={img}
-                    alt={`Promotional tattoo design ${index + 1} by Ahmedabad Ink Tattoo Studio`}
-                    className="w-full h-72 object-cover transition-all duration-500 group-hover:filter group-hover:contrast-125"
-                    onLoad={handleImageLoad}
-                    onError={() => setImagesLoaded(true)}
-                  />
-                  <div className="absolute top-2 left-2 w-4 h-4 border-l-2 border-t-2 border-red-500 opacity-0 group-hover:opacity-100 transition-all duration-500" />
-                  <div className="absolute top-2 right-2 w-4 h-4 border-r-2 border-t-2 border-red-500 opacity-0 group-hover:opacity-100 transition-all duration-500 delay-100" />
-                  <div className="absolute bottom-2 left-2 w-4 h-4 border-l-2 border-b-2 border-red-500 opacity-0 group-hover:opacity-100 transition-all duration-500 delay-200" />
-                  <div className="absolute bottom-2 right-2 w-4 h-4 border-r-2 border-b-2 border-red-500 opacity-0 group-hover:opacity-100 transition-all duration-500 delay-300" />
-                  <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-red-500 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500 delay-400 animate-ping" />
-                  <div
-                    className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-all duration-700"
-                    style={{ backgroundImage: `radial-gradient(circle at 1px 1px, rgba(239, 68, 68, 0.3) 1px, transparent 0)`, backgroundSize: '20px 20px' }}
-                  />
-                </motion.div>
+                  src={img}
+                  alt={`Promotional tattoo design ${index + 1} by Ahmedabad Ink Tattoo Studio`}
+                  className="rounded-2xl h-72"
+                />
               ))}
             </motion.div>
 
@@ -246,7 +249,7 @@ const Offers = () => {
               </motion.h3>
               <motion.div
                 variants={staggerChildren}
-                className="text-gray-300 text-left bg-gray-900/20 p-8 rounded-2xl border border-red-500/10"
+                className="text-gray-300 text-left bg-gray-900/20 p-8 rounded-2xl border border-gray-700"
               >
                 {[
                   "Offers cannot be combined with other promotions.",
@@ -281,7 +284,7 @@ const Offers = () => {
             >
               <motion.h2
                 variants={textVariants}
-                className="text-4xl md:text-6xl font-bold mb-8 font-playfair text-shadow-red"
+                className="text-4xl md:text-6xl font-bold mb-8 font-playfair"
               >
                 Our <span className="bg-gradient-to-r from-red-500 to-red-700 bg-clip-text text-transparent">Portfolio</span>
               </motion.h2>
@@ -308,51 +311,12 @@ const Offers = () => {
                 "https://ahmedabadinktattoo.com/wp-content/uploads/2024/12/IMG20180604080023-1152x1536.jpg",
                 "https://ahmedabadinktattoo.com/wp-content/uploads/2024/12/1000025709-1152x1536.jpeg",
               ].map((img, index) => (
-                <motion.div
+                <FuturisticImage
                   key={index}
-                  variants={portfolioImageVariants}
-                  initial="hidden"
-                  animate="visible"
-                  whileHover="hover"
-                  className="relative rounded-2xl overflow-hidden border border-red-500/20 cursor-pointer group bg-gradient-to-br from-red-500/5 to-black/40 backdrop-blur-md"
-                >
-                  <div className="absolute inset-0 bg-gradient-to-br from-red-500/0 via-red-500/10 to-red-700/0 opacity-0 group-hover:opacity-100 transition-all duration-700 z-10" />
-                  <div
-                    className="absolute inset-0 opacity-0 group-hover:opacity-30 transition-all duration-500"
-                    style={{
-                      backgroundImage: 'repeating-linear-gradient(45deg, transparent, transparent 4px, rgba(239, 68, 68, 0.1) 4px, rgba(239, 68, 68, 0.1) 8px)',
-                      animation: 'scan 3s linear infinite',
-                    }}
-                  />
-                  <div
-                    className="absolute inset-0 rounded-2xl border border-red-500/50 opacity-0 group-hover:opacity-100 transition-all duration-300"
-                    style={{ boxShadow: '0 0 20px rgba(239, 68, 68, 0.3), inset 0 0 20px rgba(239, 68, 68, 0.1)' }}
-                  />
-                  {!imagesLoaded && (
-                    <div className="absolute inset-0 flex items-center justify-center bg-gray-900/50">
-                      <span className="text-gray-300">Loading...</span>
-                    </div>
-                  )}
-                  <img
-                    src={img}
-                    alt={`Portfolio tattoo artwork ${index + 1} by Ahmedabad Ink Tattoo Studio`}
-                    className="w-full h-80 object-cover transition-all duration-500 group-hover:filter group-hover:contrast-125"
-                    onLoad={handleImageLoad}
-                    onError={() => setImagesLoaded(true)}
-                  />
-                  <div className="absolute top-3 left-3 w-6 h-6 border-l-3 border-t-3 border-red-500 opacity-0 group-hover:opacity-100 transition-all duration-500" />
-                  <div className="absolute top-3 right-3 w-6 h-6 border-r-3 border-t-3 border-red-500 opacity-0 group-hover:opacity-100 transition-all duration-500 delay-75" />
-                  <div className="absolute bottom-3 left-3 w-6 h-6 border-l-3 border-b-3 border-red-500 opacity-0 group-hover:opacity-100 transition-all duration-500 delay-150" />
-                  <div className="absolute bottom-3 right-3 w-6 h-6 border-r-3 border-b-3 border-red-500 opacity-0 group-hover:opacity-100 transition-all duration-500 delay-225" />
-                  <div className="absolute top-1/4 left-1/4 w-1 h-1 bg-red-500 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500 delay-300 animate-bounce" />
-                  <div className="absolute top-3/4 right-1/4 w-1 h-1 bg-red-600 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500 delay-400 animate-bounce" />
-                  <div className="absolute bottom-1/4 left-3/4 w-1 h-1 bg-red-400 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500 delay-500 animate-bounce" />
-                  <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-8 h-8 border-2 border-red-500 rounded-full opacity-0 group-hover:opacity-60 transition-all duration-500 delay-600">
-                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-red-500 rounded-full animate-pulse" />
-                  </div>
-                  <div className="absolute left-0 top-0 w-full h-0.5 bg-gradient-to-r from-transparent via-red-500 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-700 group-hover:animate-pulse" />
-                  <div className="absolute right-0 top-0 w-0.5 h-full bg-gradient-to-b from-transparent via-red-500 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-700 delay-100 group-hover:animate-pulse" />
-                </motion.div>
+                  src={img}
+                  alt={`Portfolio tattoo artwork ${index + 1} by Ahmedabad Ink Tattoo Studio`}
+                  className="rounded-2xl h-80"
+                />
               ))}
             </motion.div>
           </div>
@@ -369,7 +333,7 @@ const Offers = () => {
             >
               <motion.h2
                 variants={textVariants}
-                className="text-4xl md:text-6xl font-bold mb-12 font-playfair text-shadow-red"
+                className="text-4xl md:text-6xl font-bold mb-12 font-playfair"
               >
                 <span className="bg-gradient-to-r from-red-500 to-red-700 bg-clip-text text-transparent">Contact Us</span>
               </motion.h2>
@@ -391,7 +355,6 @@ const Offers = () => {
                     whileHover={{
                       scale: 1.2,
                       color: '#C41E3A',
-                      textShadow: '0 0 15px rgba(239, 68, 68, 0.6)',
                       transition: { duration: 0.3 },
                     }}
                     className="text-gray-300 transition-all duration-300"
@@ -423,11 +386,10 @@ const Offers = () => {
               </motion.div>
 
               <motion.a
-                href="#contact"
+                href="/contactpage"
                 variants={textVariants}
                 whileHover={{
                   scale: 1.05,
-                  boxShadow: '0 0 30px rgba(239, 68, 68, 0.5)',
                   backgroundColor: 'transparent',
                   color: '#C41E3A',
                   borderColor: '#C41E3A',
@@ -442,20 +404,6 @@ const Offers = () => {
             </motion.div>
           </div>
         </section>
-
-        <style jsx>{`
-          @keyframes shimmer {
-            0% { background-position: -200% 0; }
-            100% { background-position: 200% 0; }
-          }
-          @keyframes scan {
-            0% { transform: translateY(-100%); }
-            100% { transform: translateY(100vh); }
-          }
-          .text-shadow-red {
-            text-shadow: 0 0 20px rgba(239, 68, 68, 0.4);
-          }
-        `}</style>
       </div>
     </ErrorBoundary>
   );
