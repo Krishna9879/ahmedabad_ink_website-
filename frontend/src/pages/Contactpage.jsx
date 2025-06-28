@@ -161,7 +161,7 @@ const Contact = () => {
             className="text-xl text-gray-300 max-w-3xl mx-auto"
             style={{ fontFamily: "'Open Sans', sans-serif" }}
           >
-            Thank you for your interest in our services! We’re excited to assist you. Please fill out the form below to get in touch.
+            Thank you for your interest in our services! We're excited to assist you. Please fill out the form below to get in touch.
           </motion.p>
         </motion.div>
       </section>
@@ -192,7 +192,7 @@ const Contact = () => {
                 style={{
                   fontFamily: "'Dosis', sans-serif",
                   color: '#ffffff',
-                  textShadow: '0 0 25px rgba(196, 30, 58, 0.7)',
+                  textShadow: '0LJ 0 25px rgba(196, 30, 58, 0.7)',
                 }}
               >
                 Get in <span className="text-primary">Touch</span>
@@ -363,23 +363,12 @@ const Contact = () => {
               </motion.div>
             </motion.div>
 
-            {/* Contact Form */}
+            {/* Contact Form - Double Border Removed */}
             <motion.div
               variants={textVariants}
               className="relative bg-gray-900/20 p-6 rounded-xl border-2 border-primary/30"
               style={{ boxShadow: 'inset 0 0 10px rgba(196, 30, 58, 0.3)' }}
             >
-              <motion.div
-                className="absolute inset-0 border-2 border-primary/50 m-2 rounded-xl"
-                animate={{
-                  boxShadow: [
-                    '0 0 20px rgba(196, 30, 58, 0.5)',
-                    '0 0 30px rgba(196, 30, 58, 0.7)',
-                    '0 0 20px rgba(196, 30, 58, 0.5)',
-                  ],
-                }}
-                transition={{ duration: 2, repeat: Infinity, ease: 'easeOut' }}
-              />
               <h2
                 className="text-3xl md:text-4xl font-bold mb-6 relative inline-block z-10 group"
                 style={{
@@ -503,17 +492,6 @@ const Contact = () => {
                     ))}
                   </div>
                   <span className="relative z-10">Send</span>
-                  <motion.div
-                    className="absolute inset-0 border-2 border-primary/50 m-1 rounded-lg"
-                    animate={{
-                      boxShadow: [
-                        '0 0 20px rgba(196, 30, 58, 0.5)',
-                        '0 0 30px rgba(196, 30, 58, 0.7)',
-                        '0 0 20px rgba(196, 30, 58, 0.5)',
-                      ],
-                    }}
-                    transition={{ duration: 2, repeat: Infinity, ease: 'easeOut' }}
-                  />
                 </motion.button>
               </form>
             </motion.div>
@@ -561,7 +539,7 @@ const Contact = () => {
               />
               <iframe
                 className="relative z-10 w-full"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3671.360!2d72.304!3d23.0278627!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e86e6d7a763e5%3A0x4b4e3e5f1e5f0e5b!2sAhmedabad%20Ink%20Tattoo%20Studio!5e0!3m2!1sen!2sin!5m2!1sen!2sin"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3671.360!2d72.304!3d23.0278627!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e86e6d7a763e5%3A0x4b4e3e5f1e5f0e5b!2sAhmedabad%20Ink%20Tattoo%20Studio!5e0!3m2!1sen!2sin!5m2!1sen!2sin&map_id=dark_map_style"
                 width="100%"
                 height="400"
                 style={{ border: 0 }}

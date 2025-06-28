@@ -193,30 +193,19 @@ const Services = () => {
             className="text-lg text-gray-300 max-w-4xl mx-auto mb-6"
             style={{ fontFamily: "'Open Sans', sans-serif'" }}
           >
-            At Ahmedabad Ink Tattoo Studio, we believe that every tattoo tells a unique story. Our Custom Tattoo Design Service is dedicated to creating bespoke tattoos that reflect your individuality and vision. Whether you’re exploring intricate designs, bold patterns, or subtle art, we’re here to bring your ideas to life.
+            At Ahmedabad Ink Tattoo Studio, we believe that every tattoo tells a unique story. Our Custom Tattoo Design Service is dedicated to creating bespoke tattoos that reflect your individuality and vision. Whether you're exploring intricate designs, bold patterns, or subtle art, we're here to bring your ideas to life.
           </motion.p>
           <motion.div
             variants={imageVariants}
             initial="hidden"
             animate="visible"
             whileHover="hover"
-            className="relative max-w-2xl mx-auto rounded-xl overflow-hidden border-4 border-primary/50"
+            className="relative max-w-2xl mx-auto rounded-xl overflow-hidden"
           >
             <img
               src="https://ahmedabadinktattoo.com/wp-content/uploads/2024/12/Tattoo2-596318ff11a4435e9598e7ae05359a0d.jpg"
               alt="Custom Tattoo Example"
               className="w-full h-80 object-cover"
-            />
-            <motion.div
-              className="absolute inset-0 border-2 border-primary/60 m-2 rounded-lg"
-              variants={glowVariants}
-              initial="hidden"
-              animate="visible"
-            />
-            <motion.div
-              className="absolute inset-0 bg-gradient-to-t from-primary/30 to-transparent pointer-events-none"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1, transition: { duration: 1.5, repeat: Infinity, repeatType: 'reverse' } }}
             />
           </motion.div>
         </motion.div>
@@ -250,15 +239,15 @@ const Services = () => {
             {[
               {
                 step: "Step 1: Initial Consultation",
-                description: "Discuss your tattoo idea with our artists. Share your inspirations, preferred styles, and placement. Whether it’s a sketch, photo, or just an idea, we’ll guide you.",
+                description: "Discuss your tattoo idea with our artists. Share your inspirations, preferred styles, and placement. Whether it's a sketch, photo, or just an idea, we'll guide you.",
               },
               {
                 step: "Step 2: Design Creation",
-                description: "Our artists will craft a custom design based on your input. You’ll have the chance to review and suggest modifications before finalizing the design.",
+                description: "Our artists will craft a custom design based on your input. You'll have the chance to review and suggest modifications before finalizing the design.",
               },
               {
                 step: "Step 3: Tattoo Session",
-                description: "Once the design is ready, we’ll schedule your tattoo appointment. During the session, our artists ensure precision and care to deliver a flawless tattoo.",
+                description: "Once the design is ready, we'll schedule your tattoo appointment. During the session, our artists ensure precision and care to deliver a flawless tattoo.",
               },
             ].map((item, index) => (
               <motion.div
@@ -305,23 +294,12 @@ const Services = () => {
             initial="hidden"
             animate="visible"
             whileHover="hover"
-            className="relative max-w-xl mx-auto rounded-xl overflow-hidden border-4 border-primary/50 mt-8"
+            className="relative max-w-xl mx-auto rounded-xl overflow-hidden mt-8"
           >
             <img
               src="https://ahmedabadinktattoo.com/wp-content/uploads/2024/12/AiK-2-768x1367.jpg"
               alt="Tattoo Process"
               className="w-full h-80 object-cover"
-            />
-            <motion.div
-              className="absolute inset-0 border-2 border-primary/60 m-2 rounded-lg"
-              variants={glowVariants}
-              initial="hidden"
-              animate="visible"
-            />
-            <motion.div
-              className="absolute inset-0 bg-gradient-to-t from-primary/30 to-transparent pointer-events-none"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1, transition: { duration: 1.5, repeat: Infinity, repeatType: 'reverse' } }}
             />
           </motion.div>
         </div>
@@ -519,23 +497,12 @@ const Services = () => {
                 initial="hidden"
                 animate="visible"
                 whileHover="hover"
-                className="relative mb-4 rounded-xl overflow-hidden border-2 border-primary/40 break-inside-avoid"
+                className="relative mb-4 rounded-xl overflow-hidden break-inside-avoid"
               >
                 <img
                   src={img}
                   alt={`Portfolio ${index + 1}`}
                   className="w-full h-auto object-cover"
-                />
-                <motion.div
-                  className="absolute inset-0 border-2 border-primary/50 m-2 rounded-lg"
-                  variants={glowVariants}
-                  initial="hidden"
-                  animate="visible"
-                />
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-t from-primary/30 to-transparent pointer-events-none"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1, transition: { duration: 1.5, repeat: Infinity, repeatType: 'reverse' } }}
                 />
               </motion.div>
             ))}
@@ -564,7 +531,7 @@ const Services = () => {
               className="text-lg text-gray-300 mb-6"
               style={{ fontFamily: "'Open Sans', sans-serif'" }}
             >
-              Visit Ahmedabad Ink Tattoo Studio today and let’s bring your tattoo vision to life!
+              Visit Ahmedabad Ink Tattoo Studio today and let's bring your tattoo vision to life!
             </motion.p>
             <motion.a
               href="#contact"
